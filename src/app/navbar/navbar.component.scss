@@ -1,0 +1,24 @@
+@import  "../../styles.scss";
+
+.navbar {
+  position: relative;
+  height: 64px;
+  z-index: 5;
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+  box-shadow: 0 0 4px black;
+}
+.menu {
+  display: flex;
+  flex-direction: row;
+  // justify-content: start;
+}
+
+.menu-item {
+  padding: 1em;
+  font-size: 1.25em;
+  font-weight: bold;
+}
