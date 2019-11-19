@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="center">
+    <div class="container">
+        <h1 class="title"> Hello </h1>
+        <div class="search-form">
+            <div class="search-field">
+                <mat-form-field class="search-box">
+                    <input matInput placeholder="Search ..." [formControl]="searchFormControl" />
+                </mat-form-field>
+            </div>
+            <button mat-raised-button class="search-button" (click)="search()"> Search </button>
+            <button mat-raised-button class="search-button" (click)="newBranchDialog()">
+                New Branch
+            </button>
+        </div>
+        <div *ngIf="branchList" class="branch-list">
+            <div *ngFor="let branch of branchList" class="branch-item">
+                <img src="assets/image.png" height="144px" class="image" /> <!-- dont prefix with '/' -->
+                <div class="info">
+                    <div>
+                        <!-- Info top -->
+                        <div class="name"> {{ branch.BranchName }}</div>
+                        <div class="desc"> At: {{ branch.Location }}</div>
+                    </div>
+                    <div class="others">
+                        <div> lor </div>
+                        <div> A </div>
+                        <div> A </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!branchList"> Loading... </div>
+    </div>
+</div>

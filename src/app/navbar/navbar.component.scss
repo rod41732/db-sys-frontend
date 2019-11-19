@@ -4,7 +4,8 @@
   position: relative;
   height: 64px;
   z-index: 5;
-  background-color: $primary-color;
+  background-color: $dark-brown;
+  padding-top: 12px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -14,11 +15,40 @@
 .menu {
   display: flex;
   flex-direction: row;
-  // justify-content: start;
+
+  .menu-item {
+    height: 64px;
+    border-radius: 8px 8px 0 0;
+    padding: 0 8px;
+    font-size: 1.25em;
+    font-weight: 500;
+    color: $light-brown;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    .mat-icon {
+      font-size: 36px;
+      padding-right: 12px;
+    }
+
+    * {
+      color: $light-brown;
+      text-decoration: none;
+    }
+  }
+  .menu-item.active {
+    background-color: $light-brown;
+
+    * {
+      color: $dark-brown;
+    }
+  }
+
+  .menu-item.title {
+    font-size: 36px;
+    font-weight: lighter;
+  }
 }
 
-.menu-item {
-  padding: 1em;
-  font-size: 1.25em;
-  font-weight: bold;
-}

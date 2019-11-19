@@ -1,12 +1,19 @@
 <div class="navbar">
   <!-- Left menu  -->
-  <div class="menu"> 
-    <div class='menu-item'> Digital Cafe </div>
+  <div class="menu">
+    <div class='menu-item title'>
+      Digital Cafe
+    </div>
   </div>
   <!--  Right menu -->
   <div class="menu">
-    <div class='menu-item'> Branch </div>
-    <div class='menu-item'> Promotion </div>
-    <div class='menu-item'> Login/Logout </div>
+    <div *ngFor="let item of ITEMS" class='menu-item'>
+      <div class="center">
+        <mat-icon>{{item.iconName}}</mat-icon>
+      </div>
+      <div>
+        <a [href]="'/' + item.url"> {{item.buttonText}} </a>
+      </div>
+    </div>
   </div>
 </div>
