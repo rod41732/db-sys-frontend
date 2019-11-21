@@ -7,7 +7,7 @@
   </div>
   <!--  Right menu -->
   <div class="menu">
-    <div *ngFor="let item of ITEMS" class='menu-item'>
+    <div *ngFor="let item of ITEMS" [ngClass]="{'menu-item': true, 'active': path == item.url}">
       <div class="center">
         <mat-icon>{{item.iconName}}</mat-icon>
       </div>

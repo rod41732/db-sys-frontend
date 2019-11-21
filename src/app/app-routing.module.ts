@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { BranchListComponent } from './branch-list/branch-list.component';
 import { HomeComponent } from './home/home.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
+  import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,14 @@ const routes: Routes = [
   {
     path: 'branch',
     component: BranchListComponent,
+  },
+  {
+    path: 'transaction',
+    component: TransactionListComponent,
+  },
+  {
+    path: 'transaction/:id',
+    component: TransactionInfoComponent,
   },
   {
     path: 'home',

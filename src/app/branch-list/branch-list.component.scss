@@ -1,21 +1,8 @@
 @import "../../styles.scss";
+@include common_style;
 
 .center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: $light-brown;
-
   .container {
-    width: 100%;
-    max-width: 800px;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: $medium-brown;
-    color: $dark-brown;
-    box-shadow: 0px 0px 8px 0px #0000005c;
   }
   
   .search-form {

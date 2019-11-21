@@ -1,0 +1,51 @@
+@import '../../styles.scss';
+
+@include common_style;
+
+.center {
+  
+  .container {
+    box-shadow: none;
+    background-color: white;
+    align-content: stretch;
+
+    .header {
+      width: 100%;
+      text-align: center;
+  
+      .title {
+        font-size: 1.5em;
+        position: absolute;
+      }
+  
+      .close-button {
+        float: right;
+        width: 128px;
+        height: 48px;
+      }
+    }
+    
+
+    .field {
+      width: 75%;
+      padding: 8px;
+
+      .label {
+        font-weight: bolder;
+      }
+
+      .input-box {
+        width: 100%;
+        border: none;
+        background-color: #DDDDDD;
+        padding: 8px;
+      }
+    }
+  }
+}
+
+
+
+.mat-dialog-container {
+  padding: 0! important;
+}

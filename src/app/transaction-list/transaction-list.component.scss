@@ -2,16 +2,33 @@
 
 @include common_style;
 
+.button {
+    width: 48px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    
+    * {
+        color: white;
+    }
+}
+
+.edit-button {
+    background-color: $yellow;
+}
+
+.delete-button {
+    background-color: $red;
+}
 
 .center {
     .container {
         max-width: 1400px;
-        background-color: $medium-brown;
     }
 
     .header {
         width: 100%;
-        color: $dark-brown;
+        
 
         .title {
             text-align: center;
@@ -23,27 +40,34 @@
             position: absolute;
             right: 0px;
             background-color: $dark-brown;
-            border: none;
-            border-radius: 16px 0 0 16px;
             color: $light-brown;
             font-size: 1.5rem;
             font-weight: bold;
+
             height: 48px;
             width: 64px;
+            border: none;
+            border-radius: 16px 0 0 16px;
         }
     }
 
-    .product-grid {
-        display: grid;
-        grid-template-columns: auto auto auto auto auto;
-        grid-template-rows: auto;
-        
+    table {
 
+        thead {
+            td {
+                font-weight: 500;
+            }
+        }
 
-        app-product-item {
-            margin: 12px;
+        tr {
+            height: 48px;
+            
+            td {
+                border-bottom: 1px solid #eeeeee;
+            }
         }
     }
+
 }
 
 // override normal dialog

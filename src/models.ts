@@ -52,7 +52,7 @@ export interface Product {
 }
 
 export interface ProductLine {
-    BranchID: number
+    ProductID: number
     TransID: number
     NumBuy: number
     Price: number

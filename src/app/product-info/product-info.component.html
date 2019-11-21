@@ -1,0 +1,30 @@
+<div class="center">
+    <div class="container">
+        <div class="header">
+            <div class="title">Product Info</div>
+            <button class="close-button" mat-raised-button [mat-dialog-close]="null"> X Close </button>
+        </div>
+        <img src="assets/image.png" width="128px" height="128px"/>
+        <div class="field">
+            <div class="label">ProductID</div>
+            <input class="input-box"[(ngModel)]="currentProduct.ProID" disabled />
+            <div class="error-message">error!</div>
+        </div>
+        <div class="field">
+            <div class="label">Name</div>
+            <input class="input-box" [(ngModel)]="currentProduct.Name" />
+            <div class="error-message">error!</div>
+        </div>
+        <div class="field">
+            <div class="label">Type</div>
+            <input class="input-box"[(ngModel)]="currentProduct.Type" />
+            <div class="error-message">error!</div>
+        </div>
+        <div class="field">
+            <div class="label">Default Price</div>
+            <input class="input-box" [(ngModel)]="currentProduct.DefaultPrice" />
+            <div class="error-message">error!</div>
+        </div>
+        <button mat-raised-button (click)="save()"> SAVE </button>
+    </div>
+</div>

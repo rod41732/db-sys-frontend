@@ -1,0 +1,63 @@
+@import '../../styles.scss';
+
+@include common_style;
+
+.button {
+    width: 48px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    
+    * {
+        color: white;
+    }
+}
+
+.add-button {
+    background-color: $green;
+}
+
+.delete-button {
+    background-color: $red;
+}
+
+.center {
+    .container {
+        max-width: 1400px;
+    }
+
+    .header {
+        width: 100%;
+        
+
+        .title {
+            text-align: center;
+            margin: 0 auto;
+            font-size: 32px;
+            font-weight: 500;
+        }
+    }
+
+    table {
+
+        thead {
+            td {
+                font-weight: 500;
+            }
+        }
+
+        tr {
+            height: 48px;
+            
+            td {
+                border-bottom: 1px solid #eeeeee;
+            }
+        }
+    }
+
+}
+
+// override normal dialog
+.mat-dialog-container {
+    padding: 0! important;
+}

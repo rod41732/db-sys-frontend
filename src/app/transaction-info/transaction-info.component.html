@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div class="center">
+  <div class="container">
+    <div class="header">
+      <div class="title">
+        Manage Transaction
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <td style="width: 64px"> No. </td>
+          <td style="width: 192px"> Product </td>
+          <td style="width: 96px"> Product # </td>
+          <td style="width: 128px"> Amount </td>
+          <td style="width: 128px"> Price </td>
+          <td style="width: 128px"> Total </td>
+          <td> Delete </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let line of productLines; let idx = index">
+          <td> {{ idx }}</td>
+          <td> Product name </td>
+          <td> {{ line.ProductID }} </td>
+          <td> {{ line.NumBuy }} </td>
+          <td> {{ line.Price }} </td>
+          <td> {{ line.NumBuy * line.Price }} </td>
+          <td>
+            <button class="button delete-button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td> Add </td>
+          <td>
+            <mat-form-field>
+              <input type="text" matInput [formControl]="myControl" [matAutocomplete]="product">
+            </mat-form-field>
+            <mat-autocomplete placeholder="Choose Product" #product="matAutocomplete"
+              [(ngModel)]="productLine.ProductID" (selectionChange)="changeSelection($event)">
+              <mat-option *ngFor="let product of productsList" [value]="product.ProID">
+                {{ product.Name }}
+              </mat-option>
+            </mat-autocomplete>
+          </td>
+          <td>
+            {{ productLine.ProductID }}
+          </td>
+          <td>
+            <mat-form-field class="input-box" [floatLabel]="'never'">
+              <input type="number" matInput placeholder="Amount" [(ngModel)]="productLine.NumBuy" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="input-box" [floatLabel]="'never'">
+              <input type="number" matInput placeholder="Price" [(ngModel)]="productLine.Price" />
+            </mat-form-field>
+          </td>
+          <td>
+            {{ productLine.Price * productLine.NumBuy }}
+          </td>
+          <td>
+            <button class="button add-button" (click)='addProductLine()'>
+              <mat-icon>add</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!transactions"> Loading... </div>
+  </div>
+</div>

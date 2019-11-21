@@ -7,6 +7,7 @@ import { NavBarItemDef } from "./navbar-item";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  path = '';
   ITEMS: NavBarItemDef[] = [
     {
       buttonText: 'Tranasctions',
@@ -43,7 +44,9 @@ export class NavbarComponent implements OnInit {
     route: ActivatedRoute,
   ) { 
     route.url.subscribe((res) => {
-      console.log(res[res.length-1])
+      if (res[res.length-1]) {
+        this.path = res[res.length-1].path
+      } 
     })
   }
 
