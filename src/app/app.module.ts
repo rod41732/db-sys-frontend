@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductInfoComponent } from './product-info/product-info.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TransactionInfoComponent } from './transaction-info/transaction-info.co
     HomeComponent,
     ProductInfoComponent,
     TransactionListComponent,
-    TransactionInfoComponent
+    TransactionInfoComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,

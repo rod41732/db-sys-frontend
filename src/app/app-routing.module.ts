@@ -5,9 +5,14 @@ import { BranchListComponent } from './branch-list/branch-list.component';
 import { HomeComponent } from './home/home.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
   import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginPageComponent,
+  },
   {
     path: 'product',
     component: ProductListComponent,

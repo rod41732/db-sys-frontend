@@ -12,7 +12,15 @@
         <mat-icon>{{item.iconName}}</mat-icon>
       </div>
       <div>
-        <a [href]="'/' + item.url"> {{item.buttonText}} </a>
+        <a [routerLink]="'/' + item.url"> {{item.buttonText}} </a>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="center">
+        <mat-icon> account_circle </mat-icon>
+      </div>
+      <div>
+        <a> Role: {{ role }} </a>
       </div>
     </div>
   </div>

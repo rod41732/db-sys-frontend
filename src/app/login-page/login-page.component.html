@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="center">
+    <div class="container">
+        <div class="header">
+            <div class="title">Login</div>
+        </div>
+        login image
+        <img src="assets/image.png" width="128px" height="128px"/>
+        <div class="field">
+            <div class="label">Username</div>
+            <input class="input-box"[(ngModel)]="username" />
+            <div class="error-message">error!</div>
+        </div>
+        <div class="field">
+            <div class="label">Password</div>
+            <input class="input-box" [(ngModel)]="password" />
+            <div class="error-message">error!</div>
+        </div>
+        <button mat-raised-button (click)="login()"> Login </button>
+    </div>
+</div>

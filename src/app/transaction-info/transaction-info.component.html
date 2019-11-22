@@ -2,10 +2,21 @@
 <div class="center">
   <div class="container">
     <div class="header">
-      <div class="title">
-        Manage Transaction
+      <div class="title" *ngIf="!isCreating">
+        Transaction # {{ transaction.TransID }} on {{ transaction.TransDate.toLocaleDateString() }}
+      </div>
+      <div class="title" *ngIf="isCreating">
+        Create New Transaction
       </div>
     </div>
+    <div class="form-center">
+        <mat-form-field>
+          <input matInput placeholder="Customer #" [(ngModel)]="transaction.CardID">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Date" type="date" [(ngModel)]='convertedTransDate'>
+        </mat-form-field>
+      </div>
     <table>
       <thead>
         <tr>
@@ -15,35 +26,32 @@
           <td style="width: 128px"> Amount </td>
           <td style="width: 128px"> Price </td>
           <td style="width: 128px"> Total </td>
-          <td> Delete </td>
+          <td *ngIf="isCreating"> Delete </td>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let line of productLines; let idx = index">
-          <td> {{ idx }}</td>
-          <td> Product name </td>
+          <td> {{ idx + 1 }}</td>
+          <td> {{ getProductName(line.ProductID) }} </td>
           <td> {{ line.ProductID }} </td>
           <td> {{ line.NumBuy }} </td>
           <td> {{ line.Price }} </td>
           <td> {{ line.NumBuy * line.Price }} </td>
-          <td>
+          <td *ngIf="isCreating">
             <button class="button delete-button">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </tr>
-        <tr>
+        <tr *ngIf='isCreating'>
           <td> Add </td>
           <td>
-            <mat-form-field>
-              <input type="text" matInput [formControl]="myControl" [matAutocomplete]="product">
-            </mat-form-field>
-            <mat-autocomplete placeholder="Choose Product" #product="matAutocomplete"
+            <mat-select placeholder="Choose Product"
               [(ngModel)]="productLine.ProductID" (selectionChange)="changeSelection($event)">
               <mat-option *ngFor="let product of productsList" [value]="product.ProID">
                 {{ product.Name }}
               </mat-option>
-            </mat-autocomplete>
+            </mat-select>
           </td>
           <td>
             {{ productLine.ProductID }}
@@ -67,8 +75,17 @@
             </button>
           </td>
         </tr>
+        <tr class="summary">
+          <td colspan="5"></td>
+          <td> {{ getTransactionSum() }}</td>
+        </tr>
       </tbody>
     </table>
-    <div *ngIf="!transactions"> Loading... </div>
+    <div *ngIf="!productLines"> Loading... </div>
+  </div>
+  <div class="distributed">
+    <button (click)="createTransaction()">Create</button>
+    <button (click)="cancel()">Cancel</button>
+    <button (click)="clear()">Clear</button>
   </div>
 </div>

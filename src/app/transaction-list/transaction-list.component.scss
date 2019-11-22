@@ -25,7 +25,11 @@
     .container {
         max-width: 1400px;
     }
-
+    .search-form {
+        > * {
+            margin: 8px;
+        }
+    }
     .header {
         width: 100%;
         

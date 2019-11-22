@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Transaction } from 'src/models';
+import { Transaction, BranchFilter } from 'src/models';
 import { TransactionService } from '../transaction.service';
 
 @Component({
@@ -10,7 +10,10 @@ import { TransactionService } from '../transaction.service';
 })
 export class TransactionListComponent implements OnInit {
   searchFormControl = new FormControl();
-  transactions: Transaction[]
+  transactions: Transaction[];
+  filter: BranchFilter = {};
+
+
   constructor(
     public transactionService: TransactionService
   ) { }
@@ -31,6 +34,38 @@ export class TransactionListComponent implements OnInit {
 
   deleteTransaction(transID: number) {
     this.transactionService.deleteTransaction(transID);
+  }
+
+  
+  padzero(str, length) {
+    return str.toString().padStart(length, '0');
+  }
+
+  get fromDate(): string {
+    const date = this.filter.FromDate;
+    if (!date) return "";
+    return `${this.padzero(date.getFullYear(), 4)}-${this.padzero(date.getMonth() + 1, 2)}-${this.padzero(date.getDate(), 2)}`;
+  }
+
+  set fromDate(date: string) {
+    console.log('set', date);
+    this.filter.FromDate = new Date(date);
+  }
+  get toDate(): string {
+    const date = this.filter.ToDate;
+    if (!date) return "";
+    return `${this.padzero(date.getFullYear(), 4)}-${this.padzero(date.getMonth() + 1, 2)}-${this.padzero(date.getDate(), 2)}`;
+  }
+
+  set toDate(date: string) {
+    console.log('set', date);
+    this.filter.ToDate = new Date(date);
+  }
+  
+  search() {
+    this.transactionService.filterTransaction(this.filter).subscribe((res) => {
+      this.transactions = res;
+    });
   }
 
 }

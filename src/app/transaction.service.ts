@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Transaction, ProductLine} from 'src/models';
+import { Transaction, ProductLine, BranchFilter} from 'src/models';
 import { Observable, of } from 'rxjs';
 
 const transactions: Transaction[] = [
@@ -65,6 +65,10 @@ export class TransactionService {
     return of(transactions);
   }
 
+  getTransactionById(transID: number): Observable<Transaction | undefined> {
+    return of(transactions.filter(txn => txn.TransID == transID)[0]);
+  }
+
   getProductLines(transID: number): Observable<ProductLine[]> {
     return of(productLines);
   }
@@ -75,4 +79,18 @@ export class TransactionService {
       transactions.splice(idx, 1);
   }
 
+  createTransaction(transaction: Transaction, transProductLines: ProductLine[]) {
+    transactions.push(transaction);
+    productLines.push(...transProductLines);
+  }
+
+  // pred(date, )
+
+  filterTransaction(filter: BranchFilter): Observable<Transaction[]> {
+    const {BranchID, FromDate, ToDate} = filter;
+    const f1 = transactions.filter(txn => !BranchID || BranchID == txn.BranchID)
+    const f2 = f1.filter(txn => !FromDate || FromDate.getTime() <= txn.TransDate.getTime())
+    const f3 = f2.filter(txn => !ToDate ||  txn.TransDate.getTime() <= ToDate.getTime())
+    return of(f3);
+  }
 }

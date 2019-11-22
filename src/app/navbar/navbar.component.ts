@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavBarItemDef } from "./navbar-item";
+import { UserService } from '../user.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  role: string;
+
   path = '';
   ITEMS: NavBarItemDef[] = [
     {
@@ -34,23 +37,20 @@ export class NavbarComponent implements OnInit {
       url: 'logout',
       iconName: 'exit_to_app'
     },
-    {
-      buttonText: 'Role: Admin', // TODO
-      url: 'account/1', // TODO
-      iconName: 'account_circle'
-    }
   ]
   constructor(
-    route: ActivatedRoute,
-  ) { 
-    route.url.subscribe((res) => {
+    private route: ActivatedRoute,
+    private userService: UserService,
+  ) {     
+  }
+
+  ngOnInit() {
+    this.route.url.subscribe((res) => {
       if (res[res.length-1]) {
         this.path = res[res.length-1].path
       } 
     })
-  }
-
-  ngOnInit() {
+    this.userService.role.subscribe((res) => this.role = res);
   }
 
 }

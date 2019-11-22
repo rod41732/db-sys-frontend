@@ -11,9 +11,13 @@ $yellow:#ffc107;
 $red: #dc3545;
 $green: #28a745;
 * {
-  color: #111111;
+  color: $dark-brown;
 }
 
+
+body {
+    background-color: $light-brown;
+}
 
 // common styles 
 @mixin common_style {

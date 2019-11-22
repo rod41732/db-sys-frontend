@@ -57,3 +57,8 @@ export interface ProductLine {
     NumBuy: number
     Price: number
 }
+export interface BranchFilter {
+    BranchID?: number
+    FromDate?: Date
+    ToDate?: Date
+}

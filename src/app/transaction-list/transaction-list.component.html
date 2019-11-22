@@ -10,10 +10,18 @@
         <div class="search-form">
             <div class="search-field">
                 <mat-form-field class="search-box">
-                    <input matInput placeholder="Search ..." [formControl]="searchFormControl" />
+                    <input matInput placeholder="Branch" [(ngModel)]="filter.BranchID" />
                 </mat-form-field>
+                <mat-form-field class="search-box">
+                    <input matInput type="date" placeholder="From Date" [(ngModel)]="fromDate" />
+                </mat-form-field>
+                <mat-form-field class="search-box">
+                    <input matInput type="date" placeholder="To Date" [(ngModel)]="toDate" />
+                </mat-form-field>
+                <button class="search-button" (click)="search()">
+                    <img id="search-icon" src="assets/search.svg" width="24px">
+                </button>
             </div>
-            <button mat-raised-button class="search-button" (click)="search()"> Search </button>
         </div>
         <table>
             <thead>

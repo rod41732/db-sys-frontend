@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductLine, Product} from 'src/models';
+import { ProductLine, Product, Transaction} from 'src/models';
 import { TransactionService } from '../transaction.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-transaction-info',
@@ -16,6 +17,9 @@ export class TransactionInfoComponent implements OnInit {
   productLine: Partial<ProductLine> = { 
     NumBuy: 1,
   }
+  myControl = new FormControl();
+  transaction: Partial<Transaction>;
+  isCreating = false;
 
   constructor(
     public transactionService: TransactionService,
@@ -34,6 +38,15 @@ export class TransactionInfoComponent implements OnInit {
         this.transactionService.getProductLines(idx).subscribe((res) => {
           this.productLines = res;
         });
+        this.transactionService.getTransactionById(idx).subscribe((res) => {
+          this.transaction = res;
+        })
+      } else {
+        this.transaction = {
+          CardID: 1,
+          TransDate: new Date(),
+        };
+        this.isCreating = true;
       }
     })
   }
@@ -41,8 +54,9 @@ export class TransactionInfoComponent implements OnInit {
   addProductLine() {
     this.productLines.push(this.productLine as ProductLine);
     this.productLine = {
-      NumBuy: 0,
+      NumBuy: 1,
     }
+    // console.log(this.productLine)
   }
 
   changeSelection(evt) {
@@ -51,4 +65,30 @@ export class TransactionInfoComponent implements OnInit {
     this.productLine.Price = price;
   }
 
+  getTransactionSum() {
+    return this.productLines.map(pl => pl.NumBuy * pl.Price).reduce((a, b) => a+b, 0)
+  }
+
+  createTransaction() {
+    this.transactionService.createTransaction(this.transaction as Transaction, this.productLines);
+  }
+
+
+
+  padzero(str, length) {
+    return str.toString().padStart(length, '0');
+  }
+
+  cancel() {
+    window.location.href = 'transaction'
+  }
+
+  clear() {
+    this.productLines = [];
+  }
+
+  getProductName(proID: number) {
+    const product = this.productsList.filter(p => p.ProID == proID)[0];
+    return product && product.Name;
+  }
 }
