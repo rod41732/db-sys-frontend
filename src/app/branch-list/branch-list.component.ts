@@ -3,6 +3,7 @@ import { BranchService } from '../branch.service';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BranchInfoPage } from '../branch-info-page/branch-info-page.component';
+import { Branch } from 'src/models';
 
 @Component({
   selector: 'app-branch-list',
@@ -29,6 +30,11 @@ export class BranchListComponent implements OnInit {
     this.branchService.queryBranch(this.searchFormControl.value || '').subscribe(res => {
       this.branchList = res;
     });
+  }
+
+  branchAddress(branch: Branch): string {
+    const {StreetNo, SubDistrict, District, Province, ZipCode} = branch;
+    return [StreetNo, SubDistrict, District, Province, ZipCode].join(' ');
   }
 
   newBranchDialog() {

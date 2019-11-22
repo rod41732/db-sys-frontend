@@ -19,12 +19,18 @@
         <div class="info">
           <div> <!-- Info top -->
             <div class="name"> {{ branch.BranchName }}</div>
-            <div class="desc"> At: {{ branch.Location }}</div>
+            <div class="desc"> Opens: {{ branch.DailyHours }}</div>
+            <div class="location"> L: {{ branchAddress(branch) }}</div>
           </div>
           <div class="others">
-            <div> lor </div>
-            <div> A </div>
-            <div> A </div>
+            <div> 
+              <mat-icon>email</mat-icon>
+              <a [href]="'mailto:'+branch.email"> {{ branch.Email }} </a>
+             </div>
+             <div> 
+                <mat-icon>phone</mat-icon>
+                <a [href]="'tel:'+branch.PhoneNo"> {{ branch.PhoneNo }} </a>
+            </div>
           </div>
         </div>
       </div>

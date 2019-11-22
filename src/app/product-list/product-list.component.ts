@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit {
 
   newProductModal() {
     const dialogRef = this.dialog.open(ProductInfoComponent, {
-      data: {}
+      data: {},
     });
 
     dialogRef.afterClosed().subscribe(res => {

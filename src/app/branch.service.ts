@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { resolve } from "url";
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Branch } from 'src/models';
 
 const baseURL = 'http://localhost:3000'
@@ -46,7 +46,8 @@ export class BranchService {
   ) { }
 
   getAllBranches(): Observable<any> {
-    return this.api.get('/branch');
+    return of(branches);
+    // return this.api.get('/branch');
   }
 
   queryBranch(term): Observable<any> {
@@ -56,5 +57,4 @@ export class BranchService {
   createBranch(data): Observable<any> {
     return this.api.post('/branch', data);
   }
-
 }
