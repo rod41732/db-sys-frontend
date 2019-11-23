@@ -10,13 +10,21 @@
       </div>
     </div>
     <div class="form-center">
-        <mat-form-field>
-          <input matInput placeholder="Customer #" [(ngModel)]="transaction.CardID">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Date" type="date" [(ngModel)]='convertedTransDate'>
-        </mat-form-field>
-      </div>
+      <mat-form-field>
+        <mat-label> Branch </mat-label>
+        <mat-select placeholder="Branch" [(ngModel)]="transaction.BranchID" [disabled]="!isCreating">
+          <mat-option *ngFor="let branch of allBranches" [value]="branch.BranchID"> {{ branch.BranchID }}:  {{ branch.BranchName }} </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type='number' placeholder="Customer #" [(ngModel)]='transaction.CardID' [disabled]="!isCreating"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type='date' placeholder="Date" [(ngModel)]='transDate' [disabled]="!isCreating"/>
+      </mat-form-field>
+    </div>
     <table>
       <thead>
         <tr>
@@ -26,7 +34,7 @@
           <td style="width: 128px"> Amount </td>
           <td style="width: 128px"> Price </td>
           <td style="width: 128px"> Total </td>
-          <td *ngIf="isCreating"> Delete </td>
+          <td *ngIf="isCreating"></td>
         </tr>
       </thead>
       <tbody>
@@ -38,7 +46,7 @@
           <td> {{ line.Price }} </td>
           <td> {{ line.NumBuy * line.Price }} </td>
           <td *ngIf="isCreating">
-            <button class="button delete-button">
+            <button class="button delete-button" (click)="deleteLine(idx)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -70,7 +78,7 @@
             {{ productLine.Price * productLine.NumBuy }}
           </td>
           <td>
-            <button class="button add-button" (click)='addProductLine()'>
+            <button class="button add-button" (click)='addProductLine()'  [disabled]='!(productLine.ProductID)'>
               <mat-icon>add</mat-icon>
             </button>
           </td>
@@ -84,8 +92,8 @@
     <div *ngIf="!productLines"> Loading... </div>
   </div>
   <div class="distributed">
-    <button (click)="createTransaction()">Create</button>
-    <button (click)="cancel()">Cancel</button>
-    <button (click)="clear()">Clear</button>
+    <button class="bottom-button" (click)="createTransaction()" *ngIf='isCreating'>  Create </button>
+    <button class="bottom-button" (click)="cancel()"> {{ isCreating ? 'Cancel' : 'Back'}}</button>
+    <button class="bottom-button" (click)="clear()" *ngIf='isCreating'> Clear </button>
   </div>
 </div>

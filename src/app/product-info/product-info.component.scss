@@ -25,21 +25,7 @@
     }
     
 
-    .field {
-      width: 75%;
-      padding: 8px;
-
-      .label {
-        font-weight: bolder;
-      }
-
-      .input-box {
-        width: 100%;
-        border: none;
-        background-color: #DDDDDD;
-        padding: 8px;
-      }
-    }
+    @include input-box;
   }
 }
 

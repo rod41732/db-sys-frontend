@@ -9,6 +9,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { BranchInfoPage } from './branch-info-page/branch-info-page.component';
 import { AuthGuard } from "./auth.guard";
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EmployeeInfoComponent } from './employee-info/employee-info.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'employee',
     component: EmployeeListComponent,
+  },
+  {
+    path: 'employee/:id',
+    component: EmployeeInfoComponent,
   },
   {
     path: 'branch/:id',

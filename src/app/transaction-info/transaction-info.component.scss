@@ -17,13 +17,17 @@
     background-color: $green;
 }
 
+.add-button:disabled {
+    opacity: 0.5;
+}
+
 .delete-button {
     background-color: $red;
 }
 
 .center {
     .container {
-        max-width: 1400px;
+        max-width: 800px;
       
         .header {
             width: 100%;
@@ -44,8 +48,10 @@
             }
         }
 
-        .search-form {
-            
+        .form-center {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
         }
     
         table {
@@ -74,12 +80,19 @@
     }
 
     .distributed {
+        position: fixed;
+        bottom: 0;
         display: flex;
         flex-direction: row;
         width: 100%;
 
         button {
             flex-grow: 1;
+            border-width: 0 1px 0 1px;
+            background-color: #eeeeee;
+            font-weight: bold;
+            height: 48px;
+            font-size: 1.25em;
         }
     }
 }

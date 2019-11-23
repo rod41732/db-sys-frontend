@@ -33,15 +33,46 @@
         }
     }
 
-    .product-grid {
+    .employee-grid {
         display: grid;
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: auto auto auto auto;
         grid-template-rows: auto;
         
 
 
-        app-product-item {
+        .employee-item {
             margin: 12px;
+            position: relative;
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 192px;
+                height: 192px;
+        
+                display: flex;
+                flex-direction: row;
+                flex-grow: 0;
+                justify-content: flex-end;
+                align-items: flex-start;
+        
+                .action-button {
+                    margin: 4px;
+                    border-radius: 4px;
+                    border: none;
+        
+        
+                    mat-icon {
+                        font-size: 24px;
+                        height: unset;
+                        width: unset;
+                    }
+                }
+                .action-button.delete {
+                    background-color: $red;
+                }
+            }
         }
     }
 }

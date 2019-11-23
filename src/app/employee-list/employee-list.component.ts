@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { Employee } from 'src/models';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -10,16 +13,22 @@ import { Employee } from 'src/models';
 export class EmployeeListComponent implements OnInit {
 
   employees: Employee[];
-  filter: Partial<Employee>;
-
+  filter: Partial<Employee> = {};
+  allowEdit: boolean;
 
   constructor(
     private employeeService: EmployeeService,
+    private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(res => {
       this.employees = res;
+    })
+    this.userService.role.subscribe(res => {
+      if (res === 'manager') this.allowEdit = true;
+      else this.allowEdit = false;
     })
   }
 
@@ -28,5 +37,24 @@ export class EmployeeListComponent implements OnInit {
       this.employees = res;
     })
   }
+
+  editEmployee(empID: number) {
+    // this.employeeService.editEmployee(empID, update);
+    this.router.navigate(['employee', empID]);
+  }
+
+  deleteEmployee(empID: number) {
+    this.employeeService.deleteEmployee(empID);
+  }
+
+  formatName(employee: Employee) {
+    return `${employee.FirstName} ${employee.LastName}`
+  }
+
+  formatAddress(employee: Employee) {
+    return `${employee.HomeAddress}`
+  }
+
+  
 
 }

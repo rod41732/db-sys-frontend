@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from "@angular/material/button";
+import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -24,6 +25,7 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
 import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EmployeeInfoComponent } from './employee-info/employee-info.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     TransactionInfoComponent,
     LoginPageComponent,
     EmployeeListComponent,
+    EmployeeInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     MatIconModule,
     FormsModule, 
     MatSelectModule,
+    MatRadioModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatAutocompleteModule,

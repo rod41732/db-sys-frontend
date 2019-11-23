@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Transaction, BranchFilter } from 'src/models';
 import { TransactionService } from '../transaction.service';
 import { padzero } from "../util";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-list',
@@ -16,7 +17,8 @@ export class TransactionListComponent implements OnInit {
 
 
   constructor(
-    public transactionService: TransactionService
+    public transactionService: TransactionService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -26,11 +28,11 @@ export class TransactionListComponent implements OnInit {
   }
 
   addTransaction() {
-    window.location.href = 'transaction/add';
+    this.router.navigate(['transaction', 'add'])
   }
 
   gotoTransaction(transID: number) {
-    window.location.href = `/transaction/${transID}`
+    this.router.navigate(['transaction', transID])
   }
 
   deleteTransaction(transID: number) {

@@ -3,30 +3,45 @@
     <div class="container">
         <div class="header">
             <div class="title"> 
-                Product 
-                <button class="add-button" (click)="newProductModal()"> + </button>
+                Employee 
+                <button class="add-button" (click)="newEmployeeModal()"> + </button>
             </div>
         </div>
         <div class="search-form">
             <mat-form-field class="search-box">
                 <input matInput placeholder="Name" [(ngModel)]='filter.name' />
             </mat-form-field>
-            <mat-select class="search-box" [(ngModel)]="filter.type" placeholder='Select type'>
-                <mat-option [value]=''>
-                    Any
-                </mat-option>
-                <mat-option *ngFor="let type of ['Coffee', 'Beverage']" [value]='type'>
-                    {{ type }}
-                </mat-option>
-            </mat-select>
             <button mat-raised-button class="search-button" (click)="search()"> Search </button>
         </div>
     </div>
-    <div class="product-grid">
-        <!-- <div *ngFor="let product of products">
-            {{product.Name}}
-        </div> -->
-        <app-product-item *ngFor="let product of products" [item]="product" [allow-edit]='allowEdit'></app-product-item>
+    <div class="employee-grid">
+        <div class="employee-item" *ngFor="let employee of employees">
+            <img src="assets/image.png" width='192px' height='192px' />
+            <div class="overlay" *ngIf='allowEdit'>
+                <button class="action-button edit" (click)="editEmployee(employee.EmpID)">
+                    <mat-icon class="action-icon">edit</mat-icon>
+                </button>
+                <button class="action-button delete" (click)="deleteEmployee(employee.EmpID)">
+                    <mat-icon class="action-icon">delete</mat-icon>
+                </button>
+            </div>
+            <div class="name"> Firstname lastname </div>
+            <div class="detail"> fulltime at bracnh X </div>
+            <div class="contact-buttons">
+                <div>
+                    <div>
+                        <mat-icon>email</mat-icon>
+                    </div>
+                    <a href='mailto:rod8171@gmail.com'> rod8711@gmail.com </a>
+                </div>
+                <div>
+                    <div>
+                        <mat-icon>phone</mat-icon>
+                    </div>
+                    <a href='tel:089923122'> 0891232344 </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div *ngIf="!products"> Loading... </div>
+    <div *ngIf="!employee"> Loading... </div>
 </div>

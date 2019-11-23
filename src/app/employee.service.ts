@@ -58,6 +58,8 @@ employees.push({
   EmpID: 5,
 })
 
+let idx = 5;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -85,12 +87,29 @@ export class EmployeeService {
     return of(true);
   }
 
+  // primitives
+  createEmployee(employee: Employee): Observable<Employee> {
+    employee.EmpID = ++idx;
+    employees.push(employee);
+    return of(employee)
+  }
+
   searchEmployee(filter: Partial<Employee>): Observable<Employee[]> {
     let f = employees;
     for (let key in filter) {
       f = f.filter(emp => emp[key].toString().toLowerCase().includes(filter))
     }
     return of(f);
+  }
+
+  editEmployee(empID: number, update: Partial<Employee>) {
+    const employee =employees.filter(emp => emp.EmpID == empID)[0];
+    for (let key in update) employee[key] = update[key]
+    return of(true); 
+  }
+
+  deleteEmployee(empID: number) {
+
   }
 
 }

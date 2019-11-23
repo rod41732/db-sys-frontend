@@ -20,28 +20,28 @@ export class NavbarComponent implements OnInit {
       iconName: 'money',
       roles: ['manager', 'employee'],
     },
-    {
-      buttonText: 'Employees',
-      url: 'employee',
-      iconName: 'supervisor_account',
-      roles: ['manager'],
-    },
-    {
-      buttonText: 'Branch',
-      url: 'branch',
-      iconName: 'location_city',
-    },
+    // {
+    //   buttonText: 'Employees',
+    //   url: 'employee',
+    //   iconName: 'supervisor_account',
+    //   roles: ['manager'],
+    // },
+    // {
+    //   buttonText: 'Branch',
+    //   url: 'branch',
+    //   iconName: 'location_city',
+    // },
     {
       buttonText: 'Product',
       url: 'product',
       iconName: 'emoji_food_beverage',
     },
-    {
-      buttonText: 'Card',
-      url: 'card',
-      iconName: 'credit_card',
-      roles: ['manager', 'employee'],
-    },
+    // {
+    //   buttonText: 'Card',
+    //   url: 'card',
+    //   iconName: 'credit_card',
+    //   roles: ['manager', 'employee'],
+    // },
   ]
   constructor(
     private route: ActivatedRoute,
