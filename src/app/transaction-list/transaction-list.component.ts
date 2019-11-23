@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Transaction, BranchFilter } from 'src/models';
 import { TransactionService } from '../transaction.service';
+import { padzero } from "../util";
 
 @Component({
   selector: 'app-transaction-list',
@@ -37,14 +38,10 @@ export class TransactionListComponent implements OnInit {
   }
 
   
-  padzero(str, length) {
-    return str.toString().padStart(length, '0');
-  }
-
   get fromDate(): string {
     const date = this.filter.FromDate;
     if (!date) return "";
-    return `${this.padzero(date.getFullYear(), 4)}-${this.padzero(date.getMonth() + 1, 2)}-${this.padzero(date.getDate(), 2)}`;
+    return `${padzero(date.getFullYear(), 4)}-${padzero(date.getMonth() + 1, 2)}-${padzero(date.getDate(), 2)}`;
   }
 
   set fromDate(date: string) {
@@ -54,7 +51,7 @@ export class TransactionListComponent implements OnInit {
   get toDate(): string {
     const date = this.filter.ToDate;
     if (!date) return "";
-    return `${this.padzero(date.getFullYear(), 4)}-${this.padzero(date.getMonth() + 1, 2)}-${this.padzero(date.getDate(), 2)}`;
+    return `${padzero(date.getFullYear(), 4)}-${padzero(date.getMonth() + 1, 2)}-${padzero(date.getDate(), 2)}`;
   }
 
   set toDate(date: string) {

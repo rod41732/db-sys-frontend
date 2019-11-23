@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavBarItemDef } from "./navbar-item";
 import { UserService } from '../user.service';
+import { importExpr } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,39 +10,46 @@ import { UserService } from '../user.service';
 })
 export class NavbarComponent implements OnInit {
   role: string;
+  isLoggedIn: boolean;
 
   path = '';
   ITEMS: NavBarItemDef[] = [
     {
       buttonText: 'Tranasctions',
       url: 'transaction',
-      iconName: 'money'
+      iconName: 'money',
+      roles: ['manager', 'employee'],
+    },
+    {
+      buttonText: 'Employees',
+      url: 'employee',
+      iconName: 'supervisor_account',
+      roles: ['manager'],
     },
     {
       buttonText: 'Branch',
       url: 'branch',
-      iconName: 'location_city'
+      iconName: 'location_city',
     },
     {
       buttonText: 'Product',
       url: 'product',
-      iconName: 'emoji_food_beverage'
+      iconName: 'emoji_food_beverage',
     },
     {
       buttonText: 'Card',
       url: 'card',
-      iconName: 'credit_card'
-    },
-    {
-      buttonText: 'Logout',
-      url: 'logout',
-      iconName: 'exit_to_app'
+      iconName: 'credit_card',
+      roles: ['manager', 'employee'],
     },
   ]
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
   ) {     
+    this.userService.isLoggedIn.subscribe(res => {
+      this.isLoggedIn = res;
+    });
   }
 
   ngOnInit() {
@@ -51,6 +59,19 @@ export class NavbarComponent implements OnInit {
       } 
     })
     this.userService.role.subscribe((res) => this.role = res);
+  }
+
+  canAccess(role: string, allowedRoles: string[]) {
+    if (!allowedRoles) return true; // allow by default
+    else allowedRoles.indexOf(role) !== -1;
+  }
+
+  get allowedItems() {
+    return this.ITEMS.filter(item => this.canAccess(this.role, item.roles));
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
 }

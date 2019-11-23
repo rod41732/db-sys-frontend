@@ -10,6 +10,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ProductInfoComponent implements OnInit {
   currentProduct: Partial<Product>
+  file: File
 
   constructor(
     public dialogRef: MatDialogRef<ProductInfoComponent>,
@@ -22,8 +23,10 @@ export class ProductInfoComponent implements OnInit {
   }
 
   save() {
-    console.log(this.currentProduct);
-    this.dialogRef.close(this.currentProduct);
+    this.dialogRef.close({
+      product: this.currentProduct,
+      file: this.file,
+    });
   }
 
   logChange() {
@@ -36,6 +39,10 @@ export class ProductInfoComponent implements OnInit {
 
   validateName() {
     console.log('type')
+  }
+
+  handleFiles(files: FileList) {
+    this.file = files.item(0);
   }
 
   closeDialog() {

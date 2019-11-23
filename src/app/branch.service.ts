@@ -36,6 +36,8 @@ const branches: Branch[] = [
 }
 ]
 
+let idx = 2;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,16 +47,46 @@ export class BranchService {
     private api: ApiService,
   ) { }
 
-  getAllBranches(): Observable<any> {
+  getAllBranches(): Observable<Branch[]> {
     return of(branches);
     // return this.api.get('/branch');
   }
 
-  queryBranch(term): Observable<any> {
-    return this.api.post('/branch/search', { term });
+  getBranchByID(branchID: number): Observable<Branch> {
+    return of(branches.filter(br => br.BranchID === branchID)[0]);
   }
 
-  createBranch(data): Observable<any> {
-    return this.api.post('/branch', data);
+  queryBranch(term): Observable<Branch[]> {
+    return of(branches.filter(b => b.BranchName.includes(term)))
+    // return this.api.post('/branch/search', { term });
+  }
+
+
+  // currently return {id: number}
+  createBranch(data: Branch): Observable<Branch> {
+    // return this.api.post('/branch', {
+    //   ...data,
+    //   BranchID: ++idx,
+    // });
+    data.BranchID = ++idx;
+    branches.push(data)
+    return of(data);
+  }
+
+  editBranch(branchID: number, branchData: Partial<Branch>) {
+    const idx = branches.findIndex(branch => branch.BranchID === branchID);
+    if (idx !== -1) {
+       branches[idx] = {
+         ...branches[idx],
+         ...branchData,
+       }
+    }
+  }
+
+  deleteBranch(branchID: number) {
+    const idx = branches.findIndex(branch => branch.BranchID === branchID);
+    if (idx !== -1) {
+      branches.splice(idx, -1);
+    }
   }
 }

@@ -1,0 +1,52 @@
+@import '../../styles.scss';
+
+@include common_style;
+
+
+.center {
+    .container {
+        max-width: 1400px;
+        background-color: $medium-brown;
+    }
+
+    .header {
+        width: 100%;
+        color: $dark-brown;
+
+        .title {
+            text-align: center;
+            margin: 0 auto;
+            font-size: 32px;
+            font-weight: 500;
+        }
+        .add-button {
+            position: absolute;
+            right: 0px;
+            background-color: $dark-brown;
+            border: none;
+            border-radius: 16px 0 0 16px;
+            color: $light-brown;
+            font-size: 1.5rem;
+            font-weight: bold;
+            height: 48px;
+            width: 64px;
+        }
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        grid-template-rows: auto;
+        
+
+
+        app-product-item {
+            margin: 12px;
+        }
+    }
+}
+
+// override normal dialog
+.mat-dialog-container {
+    padding: 0! important;
+}

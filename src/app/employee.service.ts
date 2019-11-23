@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models';
 import { Observable, of } from "rxjs";
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
-const Employees: Partial<Employee>[] = [
+const employees: Employee[] = [
   {
     EmpID: 1,
-    BranchID: 0,
-    FirstName: 'rodchananant',
-    LastName: 'khunakornophat',
+    BranchID: 1,
+    FirstName: "rodchananant",
+    LastName: "khunakornophat",
     Age: 20,
-    BirthDate: new Date(1999, 08, 29),
+    BirthDate: new Date(1999, 8, 29),
     HomeAddress: '75 bangsaen sai3 ....',
     HasLeft: false,
     Email: 'rod8711@gmail.com',
@@ -23,11 +24,11 @@ const Employees: Partial<Employee>[] = [
   },
   {
     EmpID: 2,
-    BranchID: 0,
+    BranchID: 2,
     FirstName: 'doge',
     LastName: 'shiba',
     Age: 20,
-    BirthDate: new Date(1999, 08, 29),
+    BirthDate: new Date(1999, 8, 29),
     HomeAddress: '75 bangsaen sai3 ....',
     HasLeft: false,
     Email: 'doge@gmail.com',
@@ -41,6 +42,22 @@ const Employees: Partial<Employee>[] = [
   }
 ];
 
+employees.push({
+  ...employees[1],
+  FirstName: 'doge3',
+  EmpID: 3,
+})
+employees.push({
+  ...employees[1],
+  FirstName: 'doge4',
+  EmpID: 4,
+})
+employees.push({
+  ...employees[1],
+  FirstName: 'doge5',
+  EmpID: 5,
+})
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,7 +68,29 @@ export class EmployeeService {
   ) { }
 
   getEmployees() {
-    return of(Employees);
+    return of(employees);
+  }
+
+  getEmployeeByID(id: number): Observable<Employee> {
+    return of(employees.filter(emp => emp.EmpID === id)[0]);
+  }
+
+  getEmployeesInBranch(branchID: number): Observable<Employee[]> {
+    return of(employees.filter(emp => emp.BranchID === branchID));
+  }
+
+  setEmployeeBranch(empID: number, branchID: number): Observable<any> {
+    const employee =employees.filter(emp => emp.EmpID == empID)[0];
+    employee.BranchID = branchID;
+    return of(true);
+  }
+
+  searchEmployee(filter: Partial<Employee>): Observable<Employee[]> {
+    let f = employees;
+    for (let key in filter) {
+      f = f.filter(emp => emp[key].toString().toLowerCase().includes(filter))
+    }
+    return of(f);
   }
 
 }

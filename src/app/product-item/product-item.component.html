@@ -1,6 +1,6 @@
 <div class="container product-item">
     <img src="assets/image.png" width='128px' height='128px' />
-    <div class="overlay">
+    <div class="overlay" *ngIf='allowEdit'>
         <button class="action-button edit" (click)="editItem()">
             <mat-icon class="action-icon">edit</mat-icon>
         </button>

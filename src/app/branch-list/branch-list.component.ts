@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BranchInfoPage } from '../branch-info-page/branch-info-page.component';
 import { Branch } from 'src/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-branch-list',
@@ -16,7 +17,8 @@ export class BranchListComponent implements OnInit {
 
   constructor(
     private branchService: BranchService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -37,17 +39,11 @@ export class BranchListComponent implements OnInit {
     return [StreetNo, SubDistrict, District, Province, ZipCode].join(' ');
   }
 
-  newBranchDialog() {
-    const dialogRef = this.dialog.open(BranchInfoPage, {
-      data: {},
-    });
+  newBranch() {
+      this.router.navigate(['branch', 'add']);
+  }
 
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res != null) {
-        this.branchService.createBranch(res).subscribe(() => {
-          this.search(); // refresh page
-        });
-      }
-    });
+  deleteBranch(branchID: number) {
+    this.branchService.deleteBranch(branchID);
   }
 }

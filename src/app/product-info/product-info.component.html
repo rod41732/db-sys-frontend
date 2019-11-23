@@ -4,7 +4,8 @@
             <div class="title">Product Info</div>
             <button class="close-button" mat-raised-button [mat-dialog-close]="null"> X Close </button>
         </div>
-        <img src="assets/image.png" width="128px" height="128px"/>
+        <img [src]="currentProduct.Image || 'assets/image.png'" width="128px" height="128px"/>
+        upload image <input type="file" (change)="handleFiles($event.target.files)"/>
         <div class="field">
             <div class="label">ProductID</div>
             <input class="input-box"[(ngModel)]="currentProduct.ProID" disabled />

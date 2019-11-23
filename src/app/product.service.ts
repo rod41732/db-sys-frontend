@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Product } from "../models";
-import { Observer, Observable, of } from 'rxjs';
+import { Product, ProductFormData } from "../models";
+import { Observer, Observable, of, from } from 'rxjs';
 const products: Product[] = [
   {
     DefaultPrice: 50,
@@ -97,13 +97,25 @@ export class ProductService {
     }
   }
 
-  editItem(id: number, product: Partial<Product>) {
+  editItem(id: number, formData: ProductFormData) {
+    const {product, file} = formData;
+    console.log('edit', product, file)
     const idx = products.findIndex(product => product.ProID === id);
     products[idx] = {...products[idx], ...product};
   }
 
-  createProduct(product: Product) {
+  createProduct(formData: ProductFormData) {
+    const {product, file} = formData;
+    console.log(file)
     if (!product) return;
     products.push(product);
+  }
+
+  searchProduct(name: string, type: string): Observable<Product[]> {
+    const f1 = products.filter(pro => !name || (pro.Name.toLowerCase().indexOf(name.toLowerCase()) !== -1));
+    console.log(f1)
+    const f2 = f1.filter(pro => !type || (pro.Type.toLowerCase().indexOf(type.toLowerCase()) !== -1));
+    console.log(f2)
+    return of(f2);
   }
 }

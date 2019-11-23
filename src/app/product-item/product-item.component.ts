@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from 'src/models';
+import { Product, ProductFormData } from 'src/models';
 import { ProductService } from '../product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductInfoComponent } from '../product-info/product-info.component';
@@ -11,7 +11,8 @@ import { ProductInfoComponent } from '../product-info/product-info.component';
 })
 export class ProductItemComponent implements OnInit {
   @Input('item') item: Product;
-
+  @Input('allow-edit') allowEdit: boolean;
+  
   constructor(
     private productService: ProductService,
     private dialog: MatDialog
@@ -23,7 +24,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   editItem() {
-    const dialogRef = this.dialog.open<ProductInfoComponent, Partial<Product>>(ProductInfoComponent, {
+    const dialogRef = this.dialog.open<ProductInfoComponent, Partial<Product>, ProductFormData>(ProductInfoComponent, {
       data: this.item,
       width: '60%',
       maxWidth: '800px'

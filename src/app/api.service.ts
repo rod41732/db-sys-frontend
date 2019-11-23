@@ -51,6 +51,22 @@ export class ApiService {
     return this.http.post<T>(resolve(baseURL, url), data, options);
   }
 
+  // files is {fileKey: File Object}
+  postForm<T>(url: string, data: any, files: any, credentials: boolean = true): Observable<T> {
+    const options: HttpOptions = {};
+    if (credentials) {
+      options.withCredentials = true;
+    }
+    const formData = new FormData();
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+    for (let key in files) {
+      formData.append(key, data[key], data[key].name);
+    }
+    return this.http.post<T>(resolve(baseURL, url), formData, options);
+  }
+
   put<T>(url: string, data: any, credentials: boolean = true): Observable<T> {
     const options: HttpOptions = {};
     if (credentials) {

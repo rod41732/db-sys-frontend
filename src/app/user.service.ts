@@ -7,7 +7,7 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class UserService {
-  currentUser =new BehaviorSubject<Partial<Employee> | null>({});
+  currentUser =new BehaviorSubject<Partial<Employee> | null>(null);
   isLoggedIn = new BehaviorSubject<boolean>(false);
   role = new BehaviorSubject<string>("guest");
 
@@ -15,12 +15,20 @@ export class UserService {
     public apiService: ApiService
   ) { 
     this.currentUser.subscribe((res) => {
-      if (!res){
-        this.isLoggedIn.next(false);
-      } else {
-        this.isLoggedIn.next(true);
-        this.role.next(res.IsManager ? 'manager' : 'employee')
-      }
+      // if (!res){
+      //   this.isLoggedIn.next(false);
+      //   this.role.next('guest');
+      // } else {
+      //   this.isLoggedIn.next(true);
+      //   this.role.next(res.IsManager ? 'manager' : 'employee')
+      // }
+
+      this.isLoggedIn.next(true);
+      this.role.next('manager');
+    })
+    this.currentUser.next({
+      FirstName: 'doge',
+      IsManager: true,
     })
   }
 
@@ -40,5 +48,9 @@ export class UserService {
       this.currentUser.next(null);
     }
     // this.apiService.post('/login')
+  }
+
+  logout() {
+    this.currentUser.next(null);
   }
 }

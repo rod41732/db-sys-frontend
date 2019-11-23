@@ -23,6 +23,7 @@ import { ProductInfoComponent } from './product-info/product-info.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     TransactionListComponent,
     TransactionInfoComponent,
     LoginPageComponent,
+    EmployeeListComponent,
   ],
   imports: [
     BrowserModule,

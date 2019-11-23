@@ -7,21 +7,27 @@
   </div>
   <!--  Right menu -->
   <div class="menu">
-    <div *ngFor="let item of ITEMS" [ngClass]="{'menu-item': true, 'active': path == item.url}">
-      <div class="center">
-        <mat-icon>{{item.iconName}}</mat-icon>
-      </div>
-      <div>
-        <a [routerLink]="'/' + item.url"> {{item.buttonText}} </a>
-      </div>
-    </div>
+      <a *ngFor="let item of ITEMS" 
+        [routerLink]="'/' + item.url">
+        <div [ngClass]="{'menu-item': true, 'active': path == item.url}">
+          <div class="center">
+            <mat-icon>{{item.iconName}}</mat-icon>
+          </div>
+          <p> {{item.buttonText}} </p>
+        </div>
+      </a>
     <div class="menu-item">
       <div class="center">
         <mat-icon> account_circle </mat-icon>
       </div>
       <div>
-        <a> Role: {{ role }} </a>
+        <p> Welcome: {{ role }} </p>
       </div>
     </div>
+    <a *ngIf="isLoggedIn" style="cursor: pointer;" (click)="logout()">
+      <div class="menu-item">
+        Logout
+      </div>
+    </a>
   </div>
 </div>

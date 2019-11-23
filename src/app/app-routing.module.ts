@@ -4,9 +4,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { BranchListComponent } from './branch-list/branch-list.component';
 import { HomeComponent } from './home/home.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
-  import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
+import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-
+import { BranchInfoPage } from './branch-info-page/branch-info-page.component';
+import { AuthGuard } from "./auth.guard";
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 const routes: Routes = [
   {
@@ -22,12 +24,23 @@ const routes: Routes = [
     component: BranchListComponent,
   },
   {
+    path: 'employee',
+    component: EmployeeListComponent,
+  },
+  {
+    path: 'branch/:id',
+    component: BranchInfoPage,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'transaction',
     component: TransactionListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'transaction/:id',
     component: TransactionInfoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',

@@ -73,12 +73,6 @@ export class TransactionInfoComponent implements OnInit {
     this.transactionService.createTransaction(this.transaction as Transaction, this.productLines);
   }
 
-
-
-  padzero(str, length) {
-    return str.toString().padStart(length, '0');
-  }
-
   cancel() {
     window.location.href = 'transaction'
   }

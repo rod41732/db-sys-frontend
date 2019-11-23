@@ -9,7 +9,7 @@
         </mat-form-field>
       </div>
       <button mat-raised-button class="search-button" (click)="search()"> Search </button>
-      <button mat-raised-button class="search-button" (click)="newBranchDialog()">
+      <button mat-raised-button class="search-button" (click)="newBranch()">
         New Branch
       </button>
     </div>
@@ -33,6 +33,8 @@
             </div>
           </div>
         </div>
+        <button mat-raised-button [routerLink]="'/branch/' + branch.BranchID"> edit </button>
+        <button mat-raised-button (click)="deleteBranch(branch.BranchID)"> delete </button>
       </div>
     </div>
     <div *ngIf="!branchList"> Loading... </div>

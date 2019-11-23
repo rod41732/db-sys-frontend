@@ -48,7 +48,14 @@ export interface Product {
     ProID: number
     Name: string
     DefaultPrice: number
+    Image?: string
     Type: string
+}
+
+// product, plus file upload
+export interface ProductFormData {
+    product: Product
+    file: File,
 }
 
 export interface ProductLine {
