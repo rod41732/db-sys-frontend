@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductInfoComponent } from '../product-info/product-info.component';
-import { Product } from 'src/models';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
+import { Product } from 'src/models';
+
 
 @Component({
   selector: 'app-product-list',
@@ -32,7 +33,10 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts().subscribe((res) => {
-      this.products = res;
+      console.log('get products', res)
+      if (res) {
+        this.products = res;
+      }
     })
   }
 
@@ -58,3 +62,4 @@ export class ProductListComponent implements OnInit {
   }
 
 }
+

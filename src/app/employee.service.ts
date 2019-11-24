@@ -109,7 +109,9 @@ export class EmployeeService {
   }
 
   deleteEmployee(empID: number) {
-
+    const idx = employees.findIndex(emp => emp.EmpID === empID);
+    if (idx !== -1)
+      employees.splice(idx, 1);
   }
 
 }

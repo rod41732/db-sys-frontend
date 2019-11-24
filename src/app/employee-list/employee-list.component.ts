@@ -47,6 +47,10 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.deleteEmployee(empID);
   }
 
+  newEmployee() {
+    this.router.navigate(['employee', 'add']);
+  }
+  
   formatName(employee: Employee) {
     return `${employee.FirstName} ${employee.LastName}`
   }

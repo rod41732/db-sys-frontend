@@ -4,27 +4,45 @@
             <div class="title">Product Info</div>
             <button class="close-button" mat-raised-button [mat-dialog-close]="null"> X Close </button>
         </div>
-        <img [src]="currentProduct.Image || 'assets/image.png'" width="128px" height="128px"/>
-        upload image <input type="file" (change)="handleFiles($event.target.files)"/>
+        <div class="centered">
+            <div class="profile" (click)="openFileUpload()" style="cursor: pointer;">
+            <img class="profile-size" src="assets/image.png"/>
+            <div class="overlay profile-size">
+            <img class="icon" src="assets/upload.svg" width="32px">
+            </div>
+        </div>
+        <input type='file' accept="image/png, image/jpg" style='display: none;' id="fileUpload" (change)='handleFiles($event.target.files)'>
+        </div>
+        
+        
         <div class="field">
             <div class="label">ProductID</div>
             <input class="input-box"[(ngModel)]="currentProduct.ProID" disabled />
-            <div class="error-message">error!</div>
+            <!-- <div class="error-message">error!</div> -->
         </div>
-        <div class="field">
-            <div class="label">Name</div>
-            <input class="input-box" [(ngModel)]="currentProduct.Name" />
-            <div class="error-message">error!</div>
+        <div class="two-per-row">
+            <div class="field">
+                <div class="label">Name</div>
+                <input class="input-box" [(ngModel)]="currentProduct.Name" />
+                <!-- <div class="error-message">error!</div> -->
+            </div>
+            <div class="field">
+                <div class="label">Type</div>
+                <input class="input-box"[(ngModel)]="currentProduct.Type" />
+                <!-- <div class="error-message">error!</div> -->
+            </div>
         </div>
-        <div class="field">
-            <div class="label">Type</div>
-            <input class="input-box"[(ngModel)]="currentProduct.Type" />
-            <div class="error-message">error!</div>
-        </div>
-        <div class="field">
-            <div class="label">Default Price</div>
-            <input class="input-box" [(ngModel)]="currentProduct.DefaultPrice" />
-            <div class="error-message">error!</div>
+        <div class="three-per-row">
+            <div class="field">
+                <div class="label">Amount In Stock</div>
+                <input type='number' class="input-box" [(ngModel)]="currentProduct.AmountInStock" />
+                <!-- <div class="error-message">error!</div> -->
+            </div>
+            <div class="field">
+                <div class="label">Default Price</div>
+                <input type='number' class="input-box" [(ngModel)]="currentProduct.DefaultPrice" />
+                <!-- <div class="error-message">error!</div> -->
+            </div>
         </div>
         <button mat-raised-button (click)="save()"> SAVE </button>
     </div>

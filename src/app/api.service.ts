@@ -75,6 +75,12 @@ export class ApiService {
     return this.http.put<T>(resolve(baseURL, url), data, options);
   }
 
+patch<T>(url: string, data: any, credentials: boolean = true): Observable<T> {
+  const options: HttpOptions = {};
+  options.withCredentials = credentials;
+  return this.http.patch<T>(resolve(baseURL, url), data, options);
+}
+
   resolve(url: string) {
     return resolve(baseURL, url);
   }

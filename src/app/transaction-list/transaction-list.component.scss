@@ -23,54 +23,70 @@
 
 .center {
     .container {
-        max-width: 1400px;
-    }
-    .search-form {
-        > * {
-            margin: 8px;
-        }
-    }
-    .header {
-        width: 100%;
+        max-width: 800px;
         
-
-        .title {
-            text-align: center;
-            margin: 0 auto;
-            font-size: 32px;
-            font-weight: 500;
-        }
-        .add-button {
-            position: absolute;
-            right: 0px;
-            background-color: $dark-brown;
-            color: $light-brown;
-            font-size: 1.5rem;
-            font-weight: bold;
-
-            height: 48px;
-            width: 64px;
-            border: none;
-            border-radius: 16px 0 0 16px;
-        }
-    }
-
-    table {
-
-        thead {
-            td {
+        .header {
+            width: 100%;
+            
+    
+            .title {
+                text-align: center;
+                margin: 0 auto;
+                font-size: 32px;
                 font-weight: 500;
             }
+            .add-button {
+                position: absolute;
+                right: 0px;
+                background-color: $dark-brown;
+                color: $light-brown;
+                font-size: 1.5rem;
+                font-weight: bold;
+    
+                height: 48px;
+                width: 64px;
+                border: none;
+                border-radius: 16px 0 0 16px;
+            }
         }
+        .search-form {
+            width: 600px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 64px;
+            grid-template-rows: auto;
+            align-items: center;
+    
+            > * {
+                margin: 0 8px;
+            }
 
-        tr {
-            height: 48px;
-            
-            td {
-                border-bottom: 1px solid #eeeeee;
+            .search-button {
+
+                mat-icon {
+                    margin: auto;
+                    font-size: 36px;
+                }
+            }
+        }
+    
+        table {
+    
+            thead {
+                td {
+                    font-weight: 500;
+                }
+            }
+    
+            tr {
+                height: 48px;
+                
+                td {
+                    border-bottom: 1px solid #eeeeee;
+                }
             }
         }
     }
+  
 
 }
 

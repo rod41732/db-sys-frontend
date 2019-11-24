@@ -1,61 +1,121 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-$light-brown :#E9DBCB;
-$medium-brown: #AA8C69;
-$brown: #725B40;
-$dark-brown:#3E2723;
-$yellow:#ffc107;
+$light-brown: #e9dbcb;
+$medium-brown: #aa8c69;
+$brown: #725b40;
+$dark-brown: #3e2723;
+$yellow: #ffc107;
 $red: #dc3545;
 $green: #28a745;
+$shadow: 0px 0px 6px #272727;
 * {
   color: $dark-brown;
 }
 
-
 body {
-    background-color: $light-brown;
+  background-color: $light-brown;
 }
 
-// common styles 
+.typo-title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+// common styles
 @mixin common_style {
-    .center {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: $light-brown;
-    
-        .container {
-            padding: 16px 0;
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            // background: $medium-brown;
-            color: $dark-brown;
-            // box-shadow: 0px 0px 8px 0px #0000005c;
-    
-        }
-    }        
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $light-brown;
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // background: $medium-brown;
+      color: $dark-brown;
+      // box-shadow: 0px 0px 8px 0px #0000005c;
+    }
+  }
 }
 
+// for normal input boxes
 @mixin input-box {
-    .field {
+  .field {
     width: 75%;
     padding: 8px;
 
-        .label {
-            font-weight: bolder;
-        }
-
-        .input-box {
-            width: 100%;
-            border: none;
-            background-color: #DDDDDD;
-            padding: 8px;
-        }
+    .label {
+      font-weight: bolder;
     }
+
+    .input-box {
+      width: 100%;
+      border: none;
+      background-color: #dddddd;
+      padding: 8px;
+    }
+  }
+}
+
+// normal buttons
+@mixin button_style {
+  height: 36px;
+  border-radius: 16px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+// preset grid layouts
+@mixin single-item {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+
+  > * {
+    margin: 8px;
+  }
+}
+
+.centered {
+  @include single-item;
+  justify-items: center;
+}
+
+.one-item {
+  @include single-item;
+  justify-items: stretch;
+}
+
+.three-per-row {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto;
+
+  > * {
+    margin: 8px;
+  }
+}
+
+.two-per-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  > * {
+    margin: 8px;
+  }
 }

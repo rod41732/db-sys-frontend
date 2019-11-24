@@ -1,55 +1,91 @@
 <app-navbar></app-navbar>
 <div class="center">
-    <div class="container">
-        <!-- heder -->
-        <div class="header">
-            <div class="title" *ngIf="isCreating"> New Employee </div>
-            <div class="title" *ngIf="!isCreating"> Employee {{ employee.EmpID }} </div>
-
-
-            <mat-form-field>
-                <input matInput placeholder='Employee #' [(ngModel)]='employee.EmpID' disabled>
-            </mat-form-field>
-            <mat-select placeholder='Branch #' [(ngModel)]="employee.BranchID">
-                <mat-option *ngFor="let branch of allBranches" [value]='branch.BranchID'>{{branch.BranchID}}: {{branch.BranchName}}</mat-option>
-            </mat-select>
-            <mat-form-field>
-                <input matInput placeholder='First Name' [(ngModel)]='employee.FirstName'>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder='Last name' [(ngModel)]='employee.LastName'>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type='number' placeholder='Age' [(ngModel)]='employee.Age'>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type='date' placeholder='Birth date' [(ngModel)]='employee.BirthDate'>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder='Address' [(ngModel)]='employee.HomeAddress'>
-            </mat-form-field>
-
-            <input type='checkbox' placeholder='Has Left' [(ngModel)]='employee.HasLeft'> 
-            Has Left
-
-            <mat-form-field>
-                <input matInput type='email' placeholder='Email Adress' [(ngModel)]='employee.Email'>
-            </mat-form-field>
-
-            <mat-radio-group>
-                <mat-radio-button value='0'>Full Time</mat-radio-button>
-                <mat-radio-button value='1'>Part Time</mat-radio-button>
-                <mat-radio-button value='2'>Manager</mat-radio-button>
-            </mat-radio-group>
-
-            <mat-form-field>
-                <input matInput placeholder='username' [(ngModel)]='employee.FirstName'>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder='Last name' [(ngModel)]='employee.LastName'>
-            </mat-form-field>
-            
+  <div class="container">
+    <!-- heder -->
+    <div class="header">
+      <div class="title typo-title" *ngIf="isCreating"> New Employee </div>
+      <div class="title typo-title" *ngIf="!isCreating"> Employee {{ employee.EmpID }} </div>
+    
+      <div class="centered">
+        <div class="profile" (click)="openFileUpload()" style="cursor: pointer;">
+          <img class="profile-size" src="assets/image.png"/>
+          <div class="overlay profile-size">
+            <img class="icon" src="assets/upload.svg" width="32px">
+          </div>
         </div>
+        <input type='file' style='display: none;' id="fileUpload">
+      </div>
+      
+      <div class="two-per-row">
+        <mat-form-field>
+          <input matInput placeholder='Employee #' [(ngModel)]='employee.EmpID' disabled>
+        </mat-form-field>
+      </div>
+      
+
+      Personal
+      <div class="two-per-row">
+        <mat-form-field>
+          <input matInput placeholder='First Name' [(ngModel)]='employee.FirstName'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder='Last name' [(ngModel)]='employee.LastName'>
+        </mat-form-field>
+      </div>
+
+      <div class="two-per-row">
+        <mat-form-field>
+          <input matInput type='number' placeholder='Age' [(ngModel)]='employee.Age'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type='date' placeholder='Birth date' [(ngModel)]='employee.BirthDate'>
+        </mat-form-field>
+      </div>
+      
+      Contact
+      <div class="one-item">
+        <mat-form-field>
+          <input matInput type='email' placeholder='Email Adress' [(ngModel)]='employee.Email'>
+        </mat-form-field>
+      </div>
+      <div class="one-item">
+        <mat-form-field>
+          <input matInput placeholder='Address' [(ngModel)]='employee.HomeAddress'>
+        </mat-form-field>
+      </div>
+
+      Employment detail
+      <div class="three-per-row">
+        <mat-form-field>
+          <mat-select placeholder='Branch #' [(ngModel)]="employee.BranchID">
+            <mat-option *ngFor="let branch of allBranches" [value]='branch.BranchID'>{{branch.BranchID}}:
+              {{branch.BranchName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-checkbox  placeholder='Has Left' [(ngModel)]='employee.HasLeft'> Has Leave</mat-checkbox>
+        <mat-radio-group class="radio-group">
+          <mat-radio-button value='0'>Full Time</mat-radio-button>
+          <mat-radio-button value='1'>Part Time</mat-radio-button>
+          <mat-radio-button value='2'>Manager</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      Credentials
+      <div class="two-per-row">
+        <mat-form-field>
+          <input matInput placeholder='Username' [(ngModel)]='employee.Username'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder='Password' [(ngModel)]='employee.Password'>
+        </mat-form-field>
+      </div>
+
+      <div class="distributed">
+        <button class="bottom-button" (click)="ok()"> <mat-icon></mat-icon> {{ isCreating ? 'Create' : 'Save'}}</button>
+        <button class="bottom-button" (click)="cancel()"> {{ isCreating ? 'Cancel' : 'Back'}}</button>
+        <button class="bottom-button" (click)="clear()" *ngIf='isCreating'> Clear </button>
+      </div>
     </div>
+  </div>
 
 </div>

@@ -1,9 +1,18 @@
-@import '../../styles.scss';
+@import "../../styles.scss";
 
 @include common_style;
 
+
+
+
+
+.profile-size {
+  width: 192px;
+  height: 192px;
+}
+
+
 .center {
-  
   .container {
     box-shadow: none;
     background-color: white;
@@ -11,21 +20,58 @@
     .header {
       width: 100%;
       text-align: center;
-  
+
       .title {
         font-size: 1.5em;
         position: absolute;
       }
-  
+
       .close-button {
+        background-color: $red;
+        color: white;
         float: right;
-        width: 128px;
-        height: 48px;
+        width: 72px;
+        height: 36px;
       }
     }
-    
+
+    .profile {
+      position: relative; // just for
+
+      .overlay {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.3);
+
+        .icon {
+          position: relative;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(50%);
+          transition-duration: all 500ms;
+          border: 2px solid white;
+
+          padding: 24px;
+          border-radius: 50%;
+
+          path {
+            fill: white !important;
+          }
+        }
+      }
+    }
+    .profile:hover {
+      .overlay {
+        display: block;
+
+        .icon {
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
 
     @include input-box;
   }
 }
-

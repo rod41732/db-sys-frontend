@@ -4,7 +4,7 @@
         <div class="header">
             <div class="title"> 
                 Employee 
-                <button class="add-button" (click)="newEmployeeModal()"> + </button>
+                <button class="add-button" (click)="newEmployee()"> + </button>
             </div>
         </div>
         <div class="search-form">
@@ -25,20 +25,20 @@
                     <mat-icon class="action-icon">delete</mat-icon>
                 </button>
             </div>
-            <div class="name"> Firstname lastname </div>
-            <div class="detail"> fulltime at bracnh X </div>
+            <div class="name"> {{formatName(employee) }} </div>
+            <div class="detail"> {{formatAddress(employee) }} </div>
             <div class="contact-buttons">
                 <div>
                     <div>
                         <mat-icon>email</mat-icon>
                     </div>
-                    <a href='mailto:rod8171@gmail.com'> rod8711@gmail.com </a>
+                    <a [href]="'mailto:' + employee.Email"> {{employee.Email}} </a>
                 </div>
                 <div>
                     <div>
                         <mat-icon>phone</mat-icon>
                     </div>
-                    <a href='tel:089923122'> 0891232344 </a>
+                    <a [href]="'tel:' + employee.PhoneNo"> {{employee.PhoneNo}} </a>
                 </div>
             </div>
         </div>

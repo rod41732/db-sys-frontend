@@ -8,20 +8,18 @@
             </div>
         </div>
         <div class="search-form">
-            <div class="search-field">
-                <mat-form-field class="search-box">
-                    <input matInput placeholder="Branch" [(ngModel)]="filter.BranchID" />
-                </mat-form-field>
-                <mat-form-field class="search-box">
-                    <input matInput type="date" placeholder="From Date" [(ngModel)]="fromDate" />
-                </mat-form-field>
-                <mat-form-field class="search-box">
-                    <input matInput type="date" placeholder="To Date" [(ngModel)]="toDate" />
-                </mat-form-field>
-                <button class="search-button" (click)="search()">
-                    <img id="search-icon" src="assets/search.svg" width="24px">
-                </button>
-            </div>
+            <mat-form-field>
+                <input matInput placeholder="Branch" [(ngModel)]="filter.BranchID" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="From Date" [(ngModel)]="fromDate" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="To Date" [(ngModel)]="toDate" />
+            </mat-form-field>
+            <button class="search-button" (click)="search()">
+                <mat-icon>search</mat-icon>
+            </button>
         </div>
         <table>
             <thead>

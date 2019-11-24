@@ -47,9 +47,10 @@ export interface MemberCard {
 export interface Product {
     ProID: number
     Name: string
-    DefaultPrice: number
+    DefaultPrice?: number
+    AmountInStock?: number
     Image?: string
-    Type: string
+    Type?: string
 }
 
 // product, plus file upload

@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from "@angular/material/button";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDialogModule } from "@angular/material/dialog"
@@ -53,6 +54,7 @@ import { EmployeeInfoComponent } from './employee-info/employee-info.component';
     MatIconModule,
     FormsModule, 
     MatSelectModule,
+    MatCheckboxModule,
     MatRadioModule,
     ReactiveFormsModule,
     MatFormFieldModule,

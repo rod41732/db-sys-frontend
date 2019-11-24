@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/models';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-product-info',
@@ -41,7 +40,12 @@ export class ProductInfoComponent implements OnInit {
     console.log('type')
   }
 
+  openFileUpload() {
+    (document.querySelector('#fileUpload') as HTMLElement).click();
+  }
+
   handleFiles(files: FileList) {
+    console.log(files)
     this.file = files.item(0);
   }
 

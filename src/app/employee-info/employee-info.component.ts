@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee, Branch } from 'src/models';
 import { EmployeeService } from '../employee.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BranchService } from '../branch.service';
 
 @Component({
@@ -11,14 +11,15 @@ import { BranchService } from '../branch.service';
 })
 export class EmployeeInfoComponent implements OnInit {
 
-  employee: Employee;
+  employee: Partial<Employee> = {};
   isCreating: boolean;
   allBranches: Branch[];
 
   constructor(
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private branchService: BranchService
+    private router: Router,
+    private branchService: BranchService,
   ) { }
 
   ngOnInit() {
@@ -38,4 +39,26 @@ export class EmployeeInfoComponent implements OnInit {
     })
   }
 
+  openFileUpload() {
+    (document.querySelector('#fileUpload') as HTMLElement).click();
+  }
+  
+  ok() {
+    if (this.isCreating) this.createEmployee();
+    else this.editEmployee();
+  }
+
+  createEmployee() {
+    this.employeeService.createEmployee(this.employee as Employee);
+  }
+
+  editEmployee() {
+    this.employeeService.editEmployee(this.employee.EmpID, this.employee);
+  }
+
+  cancel() {
+    this.router.navigate(['employee']);
+  }
+
+ 
 }

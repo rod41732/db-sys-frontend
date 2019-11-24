@@ -30,14 +30,18 @@ export class ProductItemComponent implements OnInit {
       maxWidth: '800px'
     });
     dialogRef.afterClosed().subscribe((res) => {
-      if (res === null) return;
+      if (!res || !res.product) return;
       this.productService.editItem(this.item.ProID, res);
     })
   }
 
   deleteItem() {
     if (window.confirm("Do you want to delete this product ?")) {
-      this.productService.deleteItem(this.item.ProID);
+      this.productService.deleteItem(this.item.ProID).then(res => {
+        alert("OK:" + JSON.stringify(res.message))
+      }).catch(err => {
+        alert("ERROR: " + JSON.stringify(err.error.message))
+      });
     }
   }
 
