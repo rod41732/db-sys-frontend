@@ -1,58 +1,62 @@
 <app-navbar></app-navbar>
 <div class="center">
     <div class="container">
-        <div class="header">
-            <div class="title"> 
-                Transactions
-                <button class="add-button" (click)="addTransaction()"> + </button>
+        <div class="sticky-part">
+            <div class="header-grid grid-centered">
+                <div class=""></div>
+                <div class="typo-title"> 
+                    Transactions
+                </div>
+                <button class="circle-button" (click)="addTransaction()"> + </button>
             </div>
+            <div class="search-form">
+                <mat-form-field>
+                    <input matInput placeholder="Branch" [(ngModel)]="filter.BranchID" />
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="date" placeholder="From Date" [(ngModel)]="fromDate" />
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="date" placeholder="To Date" [(ngModel)]="toDate" />
+                </mat-form-field>
+                <button class="rounded-button" (click)="search()"> Search </button>
+            </div>
+            <hr class="divider">
         </div>
-        <div class="search-form">
-            <mat-form-field>
-                <input matInput placeholder="Branch" [(ngModel)]="filter.BranchID" />
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type="date" placeholder="From Date" [(ngModel)]="fromDate" />
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type="date" placeholder="To Date" [(ngModel)]="toDate" />
-            </mat-form-field>
-            <button class="search-button" (click)="search()">
-                <mat-icon>search</mat-icon>
-            </button>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 64px"> ID </th>
+                        <th style="width: 64px"> Branch </th>
+                        <th style="width: 96px"> Cust No. </th>
+                        <th style="width: 192px"> Date </th>
+                        <th style="width: 128px"> Amount </th>
+                        <th> Edit </th>
+                        <th> Delete </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td> {{transaction.TransID}} </td>
+                        <td> {{transaction.BranchID}} </td>
+                        <td> {{transaction.CardID}} </td>
+                        <td> {{transaction.TransDate.toLocaleDateString()}} </td>
+                        <td> {{transaction.Amount}} </td>
+                        <td> 
+                            <button class="button edit-button" (click)="gotoTransaction(transaction.TransID)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="button delete-button" (click)="deleteTransaction(transaction.TransID)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>                    
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="!transactions"> Loading... </div>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <td style="width: 64px"> ID </td>
-                    <td style="width: 64px"> Branch </td>
-                    <td style="width: 96px"> Cust No. </td>
-                    <td style="width: 192px"> Date </td>
-                    <td style="width: 128px"> Amount </td>
-                    <td> Edit </td>
-                    <td> Delete </td>
-                </tr>
-            </thead>
-            <tbody *ngFor="let transaction of transactions">
-                <tr>
-                    <td> {{transaction.TransID}} </td>
-                    <td> {{transaction.BranchID}} </td>
-                    <td> {{transaction.CardID}} </td>
-                    <td> {{transaction.TransDate.toLocaleDateString()}} </td>
-                    <td> {{transaction.Amount}} </td>
-                    <td> 
-                        <button class="button edit-button" (click)="gotoTransaction(transaction.TransID)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="button delete-button" (click)="deleteTransaction(transaction.TransID)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </td>                    
-                </tr>
-            </tbody>
-        </table>
-        <div *ngIf="!transactions"> Loading... </div>
     </div>
 </div>

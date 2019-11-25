@@ -45,12 +45,12 @@ export interface MemberCard {
 }
 
 export interface Product {
-    ProID: number
-    Name: string
+    ProdID: number
+    ProdName: string
     DefaultPrice?: number
     AmountInStock?: number
     Image?: string
-    Type?: string
+    ProdType?: string
 }
 
 // product, plus file upload
@@ -60,7 +60,7 @@ export interface ProductFormData {
 }
 
 export interface ProductLine {
-    ProductID: number
+    ProdID: number
     TransID: number
     NumBuy: number
     Price: number
@@ -69,4 +69,8 @@ export interface BranchFilter {
     BranchID?: number
     FromDate?: Date
     ToDate?: Date
+}
+
+export interface ResponseStatus {
+    message: string;
 }

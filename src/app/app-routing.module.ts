@@ -27,10 +27,12 @@ const routes: Routes = [
   {
     path: 'employee',
     component: EmployeeListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'employee/:id',
     component: EmployeeInfoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'branch/:id',

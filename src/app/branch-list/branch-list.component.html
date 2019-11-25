@@ -1,7 +1,13 @@
 <app-navbar></app-navbar>
 <div class="center">
   <div class="container">
-    <h1 class="title"> Hello </h1>
+    <div class="header-grid">
+      <div></div>
+      <h1 class="title"> Hello </h1>
+      <button class="search-button" (click)="newBranch()">
+        +
+      </button>
+    </div>
     <div class="search-form">
       <div class="search-field">
         <mat-form-field class="search-box">
@@ -9,9 +15,6 @@
         </mat-form-field>
       </div>
       <button mat-raised-button class="search-button" (click)="search()"> Search </button>
-      <button mat-raised-button class="search-button" (click)="newBranch()">
-        New Branch
-      </button>
     </div>
     <div *ngIf="branchList" class="branch-list">
       <div *ngFor="let branch of branchList" class="branch-item">

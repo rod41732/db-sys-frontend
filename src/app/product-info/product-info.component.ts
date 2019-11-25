@@ -10,11 +10,14 @@ import { Product } from 'src/models';
 export class ProductInfoComponent implements OnInit {
   currentProduct: Partial<Product>
   file: File
+  isCreating: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<ProductInfoComponent>,
     @Inject(MAT_DIALOG_DATA) public product: Partial<Product>,
   ) {
+    this.isCreating = !product;
+    product = product || {};
     this.currentProduct = {...product};
   }
 
@@ -22,6 +25,29 @@ export class ProductInfoComponent implements OnInit {
   }
 
   save() {
+    console.log(this.currentProduct)
+    if (!this.currentProduct.ProdName) {
+      alert("Please specify product name");
+      return;
+    } 
+    if (!this.currentProduct.ProdType) {
+      alert("Please specify product type");
+      return;
+    }
+    if (this.currentProduct.AmountInStock == null ||
+      this.currentProduct.AmountInStock == undefined ||
+      this.currentProduct.AmountInStock < 0) {
+      alert("Amount in stock must >= 0");
+      return;
+    }
+    if (this.currentProduct.DefaultPrice == null ||
+      this.currentProduct.DefaultPrice == undefined ||
+      this.currentProduct.DefaultPrice < 0) {
+      alert("Default price must >= 0");
+      return;
+    }
+
+
     this.dialogRef.close({
       product: this.currentProduct,
       file: this.file,

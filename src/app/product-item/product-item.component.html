@@ -8,6 +8,16 @@
             <mat-icon class="action-icon">delete</mat-icon>
         </button>
     </div>
-    <div class="name"> {{item.Name}} </div>
-    <div class="price"> {{item.DefaultPrice}} </div>
+    <div class="info"> 
+        <div class="name"> {{item.ProdName}} </div> 
+        <div class="type"> {{ item.ProdType || '??' }} </div>
+        <div class="field"> 
+            <span class="unit"> THB </span>
+            <span class="value"> {{item.DefaultPrice.toFixed(2)}}  </span>
+        </div>
+        <div class="field" *ngIf="allowEdit">
+            <span class="unit"> Stock </span>
+            <span class="value"> {{item.AmountInStock}}  </span>
+        </div>
+    </div>
 </div>

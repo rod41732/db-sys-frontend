@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavBarItemDef } from "./navbar-item";
 import { UserService } from '../user.service';
 import { importExpr } from '@angular/compiler/src/output/output_ast';
@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private router: Router,
   ) {     
     this.userService.isLoggedIn.subscribe(res => {
       this.isLoggedIn = res;
@@ -72,6 +73,10 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+  }
+
+  login() {
+    this.router.navigate(['login'])
   }
 
 }

@@ -3,14 +3,14 @@
     <img class='background' src='assets/product-bg.jpg'/>
     <div class="container">
         <div class="form">
-            <div class="header grid-center">
+            <div class="header grid-centered">
                 <div></div>
                 <div class="typo-title"> 
                     Product 
                 </div>
                 <button class="add-button" (click)="newProductModal()"> + </button>
             </div>
-            <div class="search-form grid-center">
+            <div class="search-form">
                 <mat-form-field class="search-box">
                     <input matInput placeholder="Name" [(ngModel)]='filter.name' />
                 </mat-form-field>
@@ -18,26 +18,28 @@
                 <mat-form-field>
                     <mat-label> Product type </mat-label>
                     <mat-select class="search-box" [(ngModel)]="filter.type" placeholder='Select type'>
-                        <mat-option [value]=''>
+                        <mat-option value=''>
                             Any
                         </mat-option>
-                        <mat-option *ngFor="let type of ['Coffee', 'Beverage']" [value]='type'>
+                        <mat-option *ngFor="let type of ['Dessert', 'Beverage']" [value]='type'>
                             {{ type }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 
-                <button class="search-button" (click)="search()"> Search </button>
+                <button class="rounded-button" (click)="search()"> Search </button>
             </div>
         </div>
         <div class="grid-wrapper">
-            <div class="product-grid">
+            <div class="product-grid" *ngIf="products">
                 <!-- <div *ngFor="let product of products">
-                    {{product.Name}}
+                    {{product.ProdName}}
                 </div> -->
                 <app-product-item *ngFor="let product of products" [item]="product" [allow-edit]='allowEdit'></app-product-item>
             </div>
-            <div *ngIf="!products"> Loading... </div>
+            <!-- <div *ngIf="!products"> Loading... </div> -->
+            <div *ngIf="!products" class="loading"> Loading... </div>
+            <div *ngIf="products && products.length == 0" class="loading"> No Product matched </div>
         </div>
     </div>
 </div>

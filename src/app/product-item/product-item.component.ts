@@ -31,14 +31,18 @@ export class ProductItemComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (!res || !res.product) return;
-      this.productService.editItem(this.item.ProID, res);
+      this.productService.editItem(this.item.ProdID, res).subscribe(res => {
+        alert("OK");
+        this.productService.getProducts().subscribe(() => {}); // refresh
+      }, err => alert("Error:" + err.error.message));
     })
   }
 
   deleteItem() {
     if (window.confirm("Do you want to delete this product ?")) {
-      this.productService.deleteItem(this.item.ProID).then(res => {
+      this.productService.deleteItem(this.item.ProdID).then(res => {
         alert("OK:" + JSON.stringify(res.message))
+        this.productService.getProducts().toPromise().then(() => {});
       }).catch(err => {
         alert("ERROR: " + JSON.stringify(err.error.message))
       });

@@ -17,22 +17,13 @@
     box-shadow: none;
     background-color: white;
 
+
     .header {
       width: 100%;
       text-align: center;
-
-      .title {
-        font-size: 1.5em;
-        position: absolute;
-      }
-
-      .close-button {
-        background-color: $red;
-        color: white;
-        float: right;
-        width: 72px;
-        height: 36px;
-      }
+      display: grid;
+      grid-template-columns: auto 128px;
+      grid-template-rows: 64px;
     }
 
     .profile {
@@ -61,7 +52,16 @@
           }
         }
       }
+
     }
+    #type-select {
+      // background-color: red;
+
+      .mat-form-field-infix {
+        border-top: 0;
+      }
+    }
+
     .profile:hover {
       .overlay {
         display: block;
@@ -70,6 +70,10 @@
           transform: translate(-50%, -50%);
         }
       }
+    }
+
+    .input-box {
+      width: 100%;
     }
 
     @include input-box;

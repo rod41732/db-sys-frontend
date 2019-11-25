@@ -1,96 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Transaction, ProductLine, BranchFilter} from 'src/models';
-import { Observable, of } from 'rxjs';
-
-const transactions: Transaction[] = [
-  {
-    TransID: 1,
-    BranchID: 1,
-    CardID: 1,
-    Amount: 100,
-    TransDate: new Date(2019, 5, 23),
-  },
-  {
-    TransID: 2,
-    BranchID: 1,
-    CardID: 3,
-    Amount: 129,
-    TransDate: new Date(2019, 5, 25),
-  },
-  {
-    TransID: 3,
-    BranchID: 2,
-    CardID: 2,
-    Amount: 100,
-    TransDate: new Date(2019, 5, 27),
-  },
-  {
-    TransID: 4,
-    BranchID: 3,
-    CardID: 2,
-    Amount: 100,
-    TransDate: new Date(2019, 5, 29),
-  }
-]
-
-
-const productLines: ProductLine[] = [
-  {
-    NumBuy: 1,
-    Price: 50,
-    ProductID: 1,
-    TransID: 1,
-  },
-  {
-    NumBuy: 2,
-    Price: 100,
-    ProductID: 1,
-    TransID: 1,
-  },{
-    NumBuy: 3,
-    Price: 40,
-    ProductID: 1,
-    TransID: 1,
-  }
-]
+import { Transaction, ProductLine, BranchFilter, ResponseStatus} from 'src/models';
+import { Observable, of, BehaviorSubject} from 'rxjs';
+import { map } from "rxjs/operators";
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
-
-  constructor() { }
+  transactions = new BehaviorSubject<Transaction[]>([]);
+  constructor(
+    private apiService: ApiService,
+  ) { }
 
   getTransactions (): Observable<Transaction[]> {
-    return of(transactions);
+    this.filterTransaction({}).subscribe(res => {
+      res.forEach(tran => tran.TransDate = new Date(tran.TransDate))
+      this.transactions.next(res);
+    })
+    return this.transactions;
   }
 
-  getTransactionById(transID: number): Observable<Transaction | undefined> {
-    return of(transactions.filter(txn => txn.TransID == transID)[0]);
+  getTransactionById(transID: number): Observable<Transaction | null> {
+    return this.apiService.get<Transaction>(`/transaction/${transID}`).pipe(
+      map(txn => {
+        console.log("transform", txn.TransDate);
+        txn.TransDate = new Date(txn.TransDate);
+        return txn;
+      })
+    );
   }
 
   getProductLines(transID: number): Observable<ProductLine[]> {
-    return of(productLines);
+    return this.apiService.get(`/transaction/${transID}/productline`);
   }
 
-  deleteTransaction(transID: number) {
-    const idx = transactions.findIndex(txn => txn.TransID === transID);
-    if (idx !== -1)
-      transactions.splice(idx, 1);
+  deleteTransaction(transID: number): Observable<ResponseStatus> {
+    return this.apiService.delete(`/transaction/${transID}`);
   }
 
-  createTransaction(transaction: Transaction, transProductLines: ProductLine[]) {
-    transactions.push(transaction);
-    productLines.push(...transProductLines);
+  createTransaction(transaction: Transaction, transProductLines: ProductLine[]): Observable<ResponseStatus> {
+    return this.apiService.post(`/transaction`, {
+      transaction,
+      productLines: transProductLines,
+    });
   }
-
-  // pred(date, )
 
   filterTransaction(filter: BranchFilter): Observable<Transaction[]> {
-    const {BranchID, FromDate, ToDate} = filter;
-    const f1 = transactions.filter(txn => !BranchID || BranchID == txn.BranchID)
-    const f2 = f1.filter(txn => !FromDate || FromDate.getTime() <= txn.TransDate.getTime())
-    const f3 = f2.filter(txn => !ToDate ||  txn.TransDate.getTime() <= ToDate.getTime())
-    return of(f3);
+    const f = filter as any;
+    if (filter.FromDate) f.FromDate = filter.FromDate.toISOString().slice(0, 10)
+    if (filter.ToDate) f.ToDate = filter.ToDate.toISOString().slice(0, 10)
+    return this.apiService.get<Transaction[]>('/transaction', f).pipe(
+      map(txns => {
+        txns.forEach(txn => txn.TransDate = new Date(txn.TransDate));
+        return txns;
+      })
+    );
   }
 }

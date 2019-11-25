@@ -61,12 +61,13 @@ body {
     .label {
       font-weight: bolder;
     }
-
+    
     .input-box {
       width: 100%;
       border: none;
       background-color: #dddddd;
       padding: 8px;
+      border-radius: 8px  ;
     }
   }
 }
@@ -93,15 +94,18 @@ body {
 
 .centered {
   @include single-item;
+  width: 100%;
   justify-items: center;
 }
 
 .one-item {
   @include single-item;
+  width: 100%;
   justify-items: stretch;
 }
 
 .three-per-row {
+  width: 100%;
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto;
@@ -112,10 +116,62 @@ body {
 }
 
 .two-per-row {
+  width: 100%;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
   > * {
     margin: 8px;
   }
+}
+
+
+hr.divider {
+  width: 100%;
+  border: 0.5px solid $medium-brown;
+}
+
+
+.header-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 96px auto 96px;
+  grid-template-rows: 72px;
+}
+
+
+.circle-button {
+  background-color: $dark-brown;
+  color: $light-brown;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  height: 48px;
+  width: 48px;
+  margin-right: 32px;
+  border: none;
+  border-radius: 50%;
+  justify-self: end;
+}
+
+.rounded-button {
+  height: 36px;
+  width: 96px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  border: 0.5px solid $brown;
+  border-radius: 16px;
+  background-color: transparent;
+
+  mat-icon {
+      margin: auto;
+      font-size: 36px;
+  }
+}
+
+.grid-centered {
+  justify-items: center;
+  align-items: center;
 }

@@ -22,7 +22,6 @@ export class UserService {
       //   this.isLoggedIn.next(true);
       //   this.role.next(res.IsManager ? 'manager' : 'employee')
       // }
-
       this.isLoggedIn.next(true);
       this.role.next('manager');
     })

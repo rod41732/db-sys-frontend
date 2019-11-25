@@ -22,66 +22,62 @@
 }
 
 .center {
+    position: relative;
+
     .container {
+        background: $light-brown;
+        position: fixed;
+        top: 76px;
+        width: 100%;
         max-width: 800px;
+        max-height: calc(100vh - 76px); // - navbar size and top 
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
         
         .header {
-            width: 100%;
-            
-    
             .title {
                 text-align: center;
                 margin: 0 auto;
                 font-size: 32px;
                 font-weight: 500;
+                align-self: center;
             }
-            .add-button {
-                position: absolute;
-                right: 0px;
-                background-color: $dark-brown;
-                color: $light-brown;
-                font-size: 1.5rem;
-                font-weight: bold;
-    
-                height: 48px;
-                width: 64px;
-                border: none;
-                border-radius: 16px 0 0 16px;
-            }
+
         }
         .search-form {
-            width: 600px;
+            width: 100%;
+            max-width: 800px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 64px;
+            grid-template-columns: 1fr 1fr 1fr 128px;
             grid-template-rows: auto;
             align-items: center;
     
             > * {
                 margin: 0 8px;
             }
-
-            .search-button {
-
-                mat-icon {
-                    margin: auto;
-                    font-size: 36px;
-                }
-            }
         }
-    
-        table {
-    
-            thead {
-                td {
-                    font-weight: 500;
+
+        .table-wrapper {
+            overflow-y: auto;
+            position: relative;
+
+            table {    
+                thead {
+                    th {
+                        background-color: $light-brown;
+                        position: sticky;
+                        top: 0;
+                        font-weight: 500;
+                    }
                 }
-            }
-    
-            tr {
-                height: 48px;
-                
-                td {
-                    border-bottom: 1px solid #eeeeee;
+        
+                tr {
+                    height: 48px;
+                    
+                    td {
+                        border-bottom: 1px solid #eeeeee;
+                    }
                 }
             }
         }

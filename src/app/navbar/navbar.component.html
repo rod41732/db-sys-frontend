@@ -10,9 +10,9 @@
       <a *ngFor="let item of ITEMS" 
         [routerLink]="'/' + item.url">
         <div [ngClass]="{'menu-item': true, 'active': path == item.url}">
-          <div class="center">
+          <!-- <div class="center">
             <mat-icon>{{item.iconName}}</mat-icon>
-          </div>
+          </div> -->
           <p> {{item.buttonText}} </p>
         </div>
       </a>
@@ -21,7 +21,7 @@
         <mat-icon> account_circle </mat-icon>
       </div>
       <div>
-        <p> Welcome: {{ role }} </p>
+        {{ role }}
       </div>
     </div>
     <a *ngIf="isLoggedIn" style="cursor: pointer;" (click)="logout()">
@@ -29,5 +29,10 @@
         Logout
       </div>
     </a>
+    <a *ngIf="!isLoggedIn" style="cursor: pointer;" (click)="login()">
+        <div class="menu-item ">
+          Login
+        </div>
+      </a>
   </div>
 </div>

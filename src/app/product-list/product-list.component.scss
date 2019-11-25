@@ -2,12 +2,6 @@
 
 @include common_style;
 
-
-.grid-center {
-    justify-items: stretch;
-    align-items: center;
-}
-
 .center {
     img.background {
         width: 100%;
@@ -33,12 +27,10 @@
        
         .form {
             width: 100%;
-            position: sticky;
-            top: 0px;
-            background-color: $medium-brown;
+            background-color: #ead9c6;
             z-index: 2;
             border-radius: 16px 16px 0 0;
-            box-shadow: 0px 1px 5px 2px #898989;
+            box-shadow: 0px 1px 4px 0px #898989;
 
           
             .header {
@@ -66,6 +58,7 @@
                 grid-template-columns: auto 160px 96px;
                 grid-template-rows: 72px;
                 margin: 0 auto;
+                align-items: center;
 
                 > * {
                     margin: 12px;
@@ -81,6 +74,8 @@
         .grid-wrapper {
             overflow: auto;
             margin: 0 8px;
+            height: calc(100vh - 46px - 78px - 144px);
+
             .product-grid {
                 display: grid;
                 grid-template-columns: auto auto auto auto auto;
@@ -90,6 +85,14 @@
                 app-product-item {
                     margin: 12px;
                 }
+            }
+
+            .loading {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                justify-content: center;
             }
         }
     }

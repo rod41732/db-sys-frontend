@@ -29,23 +29,19 @@ export class ProductService {
     return this.apiService.delete(`/product/${id}`).toPromise();
   }
 
-  editItem(id: number, formData: ProductFormData) {
-    this.apiService.patch(`/product/${id}`, formData.product);
+  editItem(id: number, formData: ProductFormData): Observable<any> {
+    return this.apiService.put(`/product/${id}`, formData.product);
   }
 
-  createProduct(formData: ProductFormData) {
-    this.apiService.post('/product', formData).subscribe(res => {
-      this.getProducts().subscribe(() => {}); // refresh
-    }, err => {
-      console.log(err);
-    })
+  createProduct(formData: ProductFormData): Observable<any> {
+    return this.apiService.post('/product', formData.product);
   }
 
   searchProduct(name: string, type: string): Observable<Product[]> {
-    const f1 = this.products.value.filter(pro => !name || (pro.Name.toLowerCase().indexOf(name.toLowerCase()) !== -1));
-    console.log(f1)
-    const f2 = f1.filter(pro => !type || (pro.Type.toLowerCase().indexOf(type.toLowerCase()) !== -1));
-    console.log(f2)
-    return of(f2);
+    const filter: Partial<Product> = {
+      ProdName: name,
+      ProdType: type,
+    };
+    return this.apiService.get('/product', filter)
   }
 }

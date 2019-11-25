@@ -1,8 +1,10 @@
 <div class="center">
     <div class="container">
-        <div class="header">
-            <div class="title">Product Info</div>
-            <button class="close-button" mat-raised-button [mat-dialog-close]="null"> X Close </button>
+        <div class="header-grid grid-centered">
+            <div></div>
+            <div class="typo-title" *ngIf="!isCreating">Product Info</div>
+            <div class="typo-title" *ngIf="isCreating">New Product</div>
+            <button class="circle-button" [mat-dialog-close]="null"> X </button>
         </div>
         <div class="centered">
             <div class="profile" (click)="openFileUpload()" style="cursor: pointer;">
@@ -13,26 +15,29 @@
         </div>
         <input type='file' accept="image/png, image/jpg" style='display: none;' id="fileUpload" (change)='handleFiles($event.target.files)'>
         </div>
-        
-        
-        <div class="field">
-            <div class="label">ProductID</div>
-            <input class="input-box"[(ngModel)]="currentProduct.ProID" disabled />
-            <!-- <div class="error-message">error!</div> -->
-        </div>
-        <div class="two-per-row">
+        <div [ngClass]='{"two-per-row": isCreating, "three-per-row": !isCreating}'>
+            <div class="field" *ngIf="!isCreating">
+                <div class="label">ProductID</div>
+                <input class="input-box"[(ngModel)]="currentProduct.ProdID" disabled />
+                <!-- <div class="error-message">error!</div> -->
+            </div>
             <div class="field">
                 <div class="label">Name</div>
-                <input class="input-box" [(ngModel)]="currentProduct.Name" />
+                <input class="input-box" [(ngModel)]="currentProduct.ProdName" />
                 <!-- <div class="error-message">error!</div> -->
             </div>
-            <div class="field">
-                <div class="label">Type</div>
-                <input class="input-box"[(ngModel)]="currentProduct.Type" />
-                <!-- <div class="error-message">error!</div> -->
+            <div class="field"  >
+                <div class="label">Name</div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="currentProduct.ProdType">
+                        <mat-option *ngFor="let type of ['Dessert', 'Beverage']" [value]='type'>
+                            {{ type }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
-        <div class="three-per-row">
+        <div class="two-per-row">
             <div class="field">
                 <div class="label">Amount In Stock</div>
                 <input type='number' class="input-box" [(ngModel)]="currentProduct.AmountInStock" />
@@ -44,6 +49,6 @@
                 <!-- <div class="error-message">error!</div> -->
             </div>
         </div>
-        <button mat-raised-button (click)="save()"> SAVE </button>
+        <button class="rounded-button" (click)="save()"> {{ isCreating ? 'Create' : 'Save' }} </button>
     </div>
 </div>

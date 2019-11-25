@@ -1,7 +1,7 @@
 // import { Product } from './models';
 
 // export class ProductDTO implements Product {
-//     ProID: number;    
+//     ProdID: number;    
 //     Name: string;
 //     DefaultPrice?: number;
 //     AmountInStock?: number;
@@ -17,12 +17,12 @@
 //         ProductType = 'Beverage',
 //         Image = '',
 //     })  {
-//         this.ProID = ProductID;
-//         this.Name = ProductName;
+//         this.ProdID = ProductID;
+//         this.ProdName = ProductName;
 //         this.DefaultPrice = DefaultPrice;
 //         this.AmountInStock = AmountInStock;
 //         this.Image = Image;
-//         this.Type = ProductType;
+//         thisProdType = ProductType;
 //     } 
 
 //     static fromProduct(product: Product): ProductDTO {
@@ -35,10 +35,10 @@
 //     // data to post API
 //     toPostData() {
 //         return {
-//             productName: this.Name,
+//             productName: this.ProdName,
 //             amountInStock: this.AmountInStock,
 //             defaultPrice: this.DefaultPrice,
-//             type: this.Type,
+//             type: thisProdType,
 //             image: this.Image,
 //         }
 //     }

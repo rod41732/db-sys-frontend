@@ -2,39 +2,33 @@
 
 @include common_style;
 
-.center {
-  margin: auto;
+.center {  
+  height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .container {
     box-shadow: none;
     background-color: white;
-    max-width: 300px;
+    width: 100%;
+    max-width: 360px;
+    padding: 32px;
+    border-radius: 16px;
 
-    .header {
-      position: relative;
-      width: 100%;
-      text-align: center;
 
-      .title {
-        font-size: 1.5em;
-        position: absolute;
-      }
-    }
-
-    .field {
-      width: 75%;
-      padding: 8px;
-
-      .label {
-        font-weight: bolder;
-      }
-
-      .input-box {
-        width: 100%;
-        border: none;
-        background-color: #dddddd;
+    .centered {
+      width: calc(100% - 64px);
+      .field {
+        width: 75%;
         padding: 8px;
+  
+        .label {
+          font-weight: bolder;
+        }
       }
     }
   }
+
 }

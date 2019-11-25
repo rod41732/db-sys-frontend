@@ -1,98 +1,109 @@
 <app-navbar></app-navbar>
 <div class="center">
   <div class="container">
+    <!-- title -->
     <div class="header">
-      <div class="title" *ngIf="!isCreating">
+      <div class="title" *ngIf="!isCreating && transaction">
         Transaction # {{ transaction.TransID }} on {{ transaction.TransDate.toLocaleDateString() }}
       </div>
       <div class="title" *ngIf="isCreating">
         Create New Transaction
       </div>
     </div>
-    <div class="form-center">
+    <!-- form -->
+    <div class="three-per-row" *ngIf="transaction">
       <mat-form-field>
         <mat-label> Branch </mat-label>
         <mat-select placeholder="Branch" [(ngModel)]="transaction.BranchID" [disabled]="!isCreating">
-          <mat-option *ngFor="let branch of allBranches" [value]="branch.BranchID"> {{ branch.BranchID }}:  {{ branch.BranchName }} </mat-option>
+          <mat-option *ngFor="let branch of allBranches" [value]="branch.BranchID"> {{ branch.BranchID }}:
+            {{ branch.BranchName }} </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type='number' placeholder="Customer #" [(ngModel)]='transaction.CardID' [disabled]="!isCreating"/>
+        <input matInput type='number' placeholder="Customer #" [(ngModel)]='transaction.CardID'
+          [disabled]="!isCreating" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type='date' placeholder="Date" [(ngModel)]='transDate' [disabled]="!isCreating"/>
+        <input matInput type='date' placeholder="Date" [(ngModel)]='transDate' [disabled]="!isCreating" />
       </mat-form-field>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <td style="width: 64px"> No. </td>
-          <td style="width: 192px"> Product </td>
-          <td style="width: 96px"> Product # </td>
-          <td style="width: 128px"> Amount </td>
-          <td style="width: 128px"> Price </td>
-          <td style="width: 128px"> Total </td>
-          <td *ngIf="isCreating"></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let line of productLines; let idx = index">
-          <td> {{ idx + 1 }}</td>
-          <td> {{ getProductName(line.ProductID) }} </td>
-          <td> {{ line.ProductID }} </td>
-          <td> {{ line.NumBuy }} </td>
-          <td> {{ line.Price }} </td>
-          <td> {{ line.NumBuy * line.Price }} </td>
-          <td *ngIf="isCreating">
-            <button class="button delete-button" (click)="deleteLine(idx)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </tr>
-        <tr *ngIf='isCreating'>
-          <td> Add </td>
-          <td>
-            <mat-select placeholder="Choose Product"
-              [(ngModel)]="productLine.ProductID" (selectionChange)="changeSelection($event)">
-              <mat-option *ngFor="let product of productsList" [value]="product.ProID">
-                {{ product.Name }}
-              </mat-option>
-            </mat-select>
-          </td>
-          <td>
-            {{ productLine.ProductID }}
-          </td>
-          <td>
-            <mat-form-field class="input-box" [floatLabel]="'never'">
-              <input type="number" matInput placeholder="Amount" [(ngModel)]="productLine.NumBuy" />
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="input-box" [floatLabel]="'never'">
-              <input type="number" matInput placeholder="Price" [(ngModel)]="productLine.Price" />
-            </mat-form-field>
-          </td>
-          <td>
-            {{ productLine.Price * productLine.NumBuy }}
-          </td>
-          <td>
-            <button class="button add-button" (click)='addProductLine()'  [disabled]='!(productLine.ProductID)'>
-              <mat-icon>add</mat-icon>
-            </button>
-          </td>
-        </tr>
-        <tr class="summary">
-          <td colspan="5"></td>
-          <td> {{ getTransactionSum() }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="!productLines"> Loading... </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 64px"> No. </th>
+            <th style="width: 192px"> Product </th>
+            <th style="width: 96px"> Product # </th>
+            <th style="width: 128px"> Amount </th>
+            <th style="width: 128px"> Price </th>
+            <th style="width: 128px"> Total </th>
+            <th *ngIf="isCreating"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of productLines; let idx = index">
+            <td> {{ idx + 1 }}</td>
+            <td> {{ getProductName(line.ProdID) }} </td>
+            <td> {{ line.ProdID }} </td>
+            <td> {{ line.NumBuy }} </td>
+            <td> {{ line.Price }} </td>
+            <td> {{ line.NumBuy * line.Price }} </td>
+            <td *ngIf="isCreating">
+              <button class="button delete-button" (click)="deleteLine(idx)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr *ngIf='isCreating' id="add-row">
+            <th> Add </th>
+            <th>
+              <mat-select placeholder="Choose Product" [(ngModel)]="productLine.ProdID"
+                (selectionChange)="changeSelection($event)">
+                <mat-option *ngFor="let product of productsList" [value]="product.ProdID">
+                  {{ product.ProdName }}
+                </mat-option>
+              </mat-select>
+            </th>
+            <th>
+              {{ productLine.ProdID }}
+            </th>
+            <th>
+              <mat-form-field class="input-box" [floatLabel]="'never'">
+                <input type="number" matInput placeholder="Amount" [(ngModel)]="productLine.NumBuy" />
+              </mat-form-field>
+            </th>
+            <th>
+              <mat-form-field class="input-box" [floatLabel]="'never'">
+                <input type="number" matInput placeholder="Price" [(ngModel)]="productLine.Price" />
+              </mat-form-field>
+            </th>
+            <th>
+              {{ productLine.Price * productLine.NumBuy }}
+            </th>
+            <th>
+              <button class="button add-button" (click)='addProductLine()' [disabled]='!(productLine.ProdID)'>
+                <mat-icon>add</mat-icon>
+              </button>
+            </th>
+          </tr>
+          <tr class="summary">
+            <th colspan="5"></th>
+            <th> {{ getTransactionSum() }}</th>
+            <th *ngIf="isCreating"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div *ngIf="!productLines"> Loading... </div>
+    </div>
+
   </div>
   <div class="distributed">
-    <button class="bottom-button" (click)="createTransaction()" *ngIf='isCreating'>  Create </button>
+    <button class="bottom-button" (click)="createTransaction()" *ngIf='isCreating'> Create </button>
     <button class="bottom-button" (click)="cancel()"> {{ isCreating ? 'Cancel' : 'Back'}}</button>
     <button class="bottom-button" (click)="clear()" *ngIf='isCreating'> Clear </button>
   </div>

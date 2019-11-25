@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductInfoComponent } from '../product-info/product-info.component';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
-import { Product } from 'src/models';
+import { Product, ProductFormData } from 'src/models';
 
 
 @Component({
@@ -42,15 +42,22 @@ export class ProductListComponent implements OnInit {
 
   newProductModal() {
     const dialogRef = this.dialog.open(ProductInfoComponent, {
-      data: {},
+      data: null,
       width: '60%',
       maxWidth: '800px',
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res: ProductFormData) => {
       console.log('add product', res);
-      if (res === null) return;
-      this.productService.createProduct(res);
+      if (!res) return;
+      this.productService.createProduct(res).subscribe(res => {
+        console.log("Add Product:", res);
+        // alert('OK');
+        this.productService.getProducts().toPromise().then(() => {});
+      }, err => {
+        console.dir(err)
+        alert('Error creating product ' + err.error.message);
+      });
     });
     
   }

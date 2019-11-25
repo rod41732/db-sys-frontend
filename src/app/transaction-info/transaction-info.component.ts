@@ -48,6 +48,7 @@ export class TransactionInfoComponent implements OnInit {
         });
         this.transactionService.getTransactionById(idx).subscribe((res) => {
           this.transaction = res;
+          console.log("get transaction", this.transaction);
         })
       } else {
         this.transaction = {
@@ -68,8 +69,8 @@ export class TransactionInfoComponent implements OnInit {
   }
 
   changeSelection(evt) {
-    const proID = evt.value;
-    const price = this.productsList.filter(p => p.ProID == proID)[0].DefaultPrice;
+    const ProdID = evt.value;
+    const price = this.productsList.filter(p => p.ProdID == ProdID)[0].DefaultPrice;
     this.productLine.Price = price;
   }
 
@@ -91,9 +92,25 @@ export class TransactionInfoComponent implements OnInit {
   }
   
   createTransaction() {
-    this.transactionService.createTransaction(this.transaction as Transaction, this.productLines);
-    alert("OK");
-    this.clear();
+    if (!this.transaction.BranchID) {
+      alert("Please choose branch ID");
+      return;
+    } 
+    if (!this.transaction.CardID) {
+      alert("No Card ID Specified");
+      return;
+    }
+    if (this.productLines.length === 0) {
+      alert("No product lines added");
+      return;
+    }
+
+    this.transactionService.createTransaction(this.transaction as Transaction, this.productLines).subscribe(() => {
+      alert("OK");
+      this.clear();
+    }, err => {
+      alert("Error" + err.error.message)
+    });
   }
   
   cancel() {
@@ -104,8 +121,8 @@ export class TransactionInfoComponent implements OnInit {
     this.productLines = [];
   }
 
-  getProductName(proID: number) {
-    const product = this.productsList.filter(p => p.ProID == proID)[0];
-    return product && product.Name;
+  getProductName(ProdID: number) {
+    const product = this.productsList.filter(p => p.ProdID == ProdID)[0];
+    return product && product.ProdName;
   }
 }
