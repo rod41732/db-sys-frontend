@@ -30,6 +30,7 @@ export class BranchInfoPage implements OnInit {
       console.log('new param', idx);
       if (!isNaN(idx)){
           this.branchService.getBranchByID(idx).subscribe((res) => {
+            res.OpenDate = new Date(res.OpenDate);
             this.branch = res;
           })
           this.employeeService.getEmployeesInBranch(idx).subscribe((res) => {
@@ -81,9 +82,9 @@ export class BranchInfoPage implements OnInit {
 
   saveOrCreate() {
     if (this.isCreating) {
-      this.branchService.createBranch(this.branch as Branch).toPromise().then((res: Branch) => {
+      this.branchService.createBranch(this.branch as Branch).toPromise().then((res: any) => {
         console.log(res);
-        this.router.navigate(['branch', res.BranchID]);
+        this.router.navigate(['branch', res.id]);
       });
     } else {
       this.branchService.editBranch(this.branch.BranchID, this.branch);

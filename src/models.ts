@@ -1,7 +1,7 @@
 export interface Branch {
     BranchID: number
     BranchName: string
-    OpenDate: Date
+    OpenDate: Date | string // depend whether it's output or input
     DailyHours: string
     Email: string
     PhoneNo: string
@@ -18,8 +18,13 @@ export interface Employee {
     FirstName: string
     LastName: string
     Age: number
-    BirthDate: Date
-    HomeAddress: string
+    BirthDate: Date | string // depend whether it's output or input
+    StreetNo: string
+    SubDistrict: string
+    District: string
+    Province: string
+    ZipCode: string
+    HomeAddress?: string ///
     HasLeft: boolean
     Email: string
     Image: string
@@ -34,7 +39,7 @@ export interface Employee {
 
 export interface Transaction {
     TransID: number
-    TransDate: Date
+    TransDate: Date | string // depend whether it's output or input
     Amount: number
     BranchID: number
     CardID: number
@@ -67,8 +72,8 @@ export interface ProductLine {
 }
 export interface BranchFilter {
     BranchID?: number
-    FromDate?: Date
-    ToDate?: Date
+    FromDate?: Date | string // depend whether it's output or input
+    ToDate?: Date | string // depend whether it's output or input
 }
 
 export interface ResponseStatus {

@@ -1,64 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Employee } from '../models';
+import { Employee, ResponseStatus } from '../models';
 import { Observable, of } from "rxjs";
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { ApiService } from './api.service';
+import { map } from 'rxjs/operators';
 
-const employees: Employee[] = [
-  {
-    EmpID: 1,
-    BranchID: 1,
-    FirstName: "rodchananant",
-    LastName: "khunakornophat",
-    Age: 20,
-    BirthDate: new Date(1999, 8, 29),
-    HomeAddress: '75 bangsaen sai3 ....',
-    HasLeft: false,
-    Email: 'rod8711@gmail.com',
-    Image: 'assets/image.png',
-    PhoneNo: '0899335688',
-    IsFulltime: false,
-    IsPartTime: false,
-    IsManager: false,
-    Username: 'rod41732',
-    Password: 'doge41732',
-  },
-  {
-    EmpID: 2,
-    BranchID: 2,
-    FirstName: 'doge',
-    LastName: 'shiba',
-    Age: 20,
-    BirthDate: new Date(1999, 8, 29),
-    HomeAddress: '75 bangsaen sai3 ....',
-    HasLeft: false,
-    Email: 'doge@gmail.com',
-    Image: 'assets/image.png',
-    PhoneNo: '1234567890',
-    IsFulltime: false,
-    IsPartTime: false,
-    IsManager: false,
-    Username: 'doge',
-    Password: 'doge41732',
-  }
-];
-
-employees.push({
-  ...employees[1],
-  FirstName: 'doge3',
-  EmpID: 3,
-})
-employees.push({
-  ...employees[1],
-  FirstName: 'doge4',
-  EmpID: 4,
-})
-employees.push({
-  ...employees[1],
-  FirstName: 'doge5',
-  EmpID: 5,
-})
-
-let idx = 5;
+const employees = [];
 
 @Injectable({
   providedIn: 'root'
@@ -67,18 +14,21 @@ export class EmployeeService {
 
 
   constructor(
+    private apiService: ApiService,
   ) { }
 
   getEmployees() {
-    return of(employees);
+    return this.apiService.get('/employee');
   }
 
   getEmployeeByID(id: number): Observable<Employee> {
-    return of(employees.filter(emp => emp.EmpID === id)[0]);
+    return this.apiService.get(`/employee/${id}`);
   }
 
   getEmployeesInBranch(branchID: number): Observable<Employee[]> {
-    return of(employees.filter(emp => emp.BranchID === branchID));
+    return this.apiService.get<Employee[]>('/employee').pipe(
+      map(res => res.filter(emp => emp.BranchID == branchID))
+    );
   }
 
   setEmployeeBranch(empID: number, branchID: number): Observable<any> {
@@ -87,11 +37,8 @@ export class EmployeeService {
     return of(true);
   }
 
-  // primitives
-  createEmployee(employee: Employee): Observable<Employee> {
-    employee.EmpID = ++idx;
-    employees.push(employee);
-    return of(employee)
+  createEmployee(employee: Employee): Observable<ResponseStatus> {
+    return this.apiService.post('/employee', employee);
   }
 
   searchEmployee(filter: Partial<Employee>): Observable<Employee[]> {

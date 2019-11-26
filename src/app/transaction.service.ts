@@ -47,9 +47,9 @@ export class TransactionService {
   }
 
   filterTransaction(filter: BranchFilter): Observable<Transaction[]> {
-    const f = filter as any;
-    if (filter.FromDate) f.FromDate = filter.FromDate.toISOString().slice(0, 10)
-    if (filter.ToDate) f.ToDate = filter.ToDate.toISOString().slice(0, 10)
+    const f = {...filter} as any; // copy lol
+    if (filter.FromDate) f.FromDate = (filter.FromDate as Date).toISOString().slice(0, 10)
+    if (filter.ToDate) f.ToDate = (filter.ToDate as Date).toISOString().slice(0, 10)
     return this.apiService.get<Transaction[]>('/transaction', f).pipe(
       map(txns => {
         txns.forEach(txn => txn.TransDate = new Date(txn.TransDate));

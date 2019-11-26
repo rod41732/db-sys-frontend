@@ -44,6 +44,11 @@ export class BranchListComponent implements OnInit {
   }
 
   deleteBranch(branchID: number) {
-    this.branchService.deleteBranch(branchID);
+    this.branchService.deleteBranch(branchID).subscribe(res => {
+      alert("OK");
+      this.branchService.getAllBranches().subscribe(() => {});
+    }, err => {
+      alert("Error" + err.error.message);
+    });
   }
 }

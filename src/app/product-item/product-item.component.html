@@ -11,11 +11,11 @@
     <div class="info"> 
         <div class="name"> {{item.ProdName}} </div> 
         <div class="type"> {{ item.ProdType || '??' }} </div>
-        <div class="field"> 
+        <div class="detail"> 
             <span class="unit"> THB </span>
             <span class="value"> {{item.DefaultPrice.toFixed(2)}}  </span>
         </div>
-        <div class="field" *ngIf="allowEdit">
+        <div class="detail" *ngIf="allowEdit">
             <span class="unit"> Stock </span>
             <span class="value"> {{item.AmountInStock}}  </span>
         </div>

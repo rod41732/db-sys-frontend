@@ -36,12 +36,12 @@ export class NavbarComponent implements OnInit {
       url: 'product',
       iconName: 'emoji_food_beverage',
     },
-    {
-      buttonText: 'Card',
-      url: 'card',
-      iconName: 'credit_card',
-      roles: ['manager', 'employee'],
-    },
+    // {
+    //   buttonText: 'Card',
+    //   url: 'card',
+    //   iconName: 'credit_card',
+    //   roles: ['manager', 'employee'],
+    // },
   ]
   constructor(
     private route: ActivatedRoute,
@@ -73,6 +73,12 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+    // this.userService.isLoggedIn.toPromise().then(() => {
+    this.userService.isLoggedIn.subscribe(res => {
+      console.log('logout: login status =', res);
+      this.router.navigate(['login']);
+    })
+    // })
   }
 
   login() {

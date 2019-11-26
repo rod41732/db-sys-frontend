@@ -36,12 +36,20 @@ export class TransactionListComponent implements OnInit {
   }
 
   deleteTransaction(transID: number) {
-    this.transactionService.deleteTransaction(transID);
+    if (window.confirm(`Delete transaction #${transID}?`)) {
+      this.transactionService.deleteTransaction(transID).toPromise().then(res => {
+        alert('OK');
+        this.transactionService.getTransactions().subscribe(() => {});
+      }).catch(err => {
+        alert("Error: " + err.error.message);
+      });
+    }
   }
 
   
   get fromDate(): string {
-    const date = this.filter.FromDate;
+    const date = this.filter.FromDate as Date;
+    console.log('filter is', this.filter);
     if (!date) return "";
     return `${padzero(date.getFullYear(), 4)}-${padzero(date.getMonth() + 1, 2)}-${padzero(date.getDate(), 2)}`;
   }
@@ -51,7 +59,7 @@ export class TransactionListComponent implements OnInit {
     this.filter.FromDate = new Date(date);
   }
   get toDate(): string {
-    const date = this.filter.ToDate;
+    const date = this.filter.ToDate as Date;
     if (!date) return "";
     return `${padzero(date.getFullYear(), 4)}-${padzero(date.getMonth() + 1, 2)}-${padzero(date.getDate(), 2)}`;
   }

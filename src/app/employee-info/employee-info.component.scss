@@ -1,8 +1,6 @@
 @import "../../styles.scss";
 @include common_style;
 
-@include input-box;
-
 
 @mixin single-item {
     display: grid;

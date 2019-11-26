@@ -1,0 +1,23 @@
+@import '../../styles.scss';
+@include common_style;
+
+.center {
+    .container {
+        display: block;
+        width: 100%;
+        max-width: 800px;
+        max-height: calc(100vh - 76px);
+        overflow-y: auto;
+    }
+}
+
+.centered {
+    margin: 16px 0;
+}
+.grid-stretch {
+    justify-items: stretch;
+}
+
+.span-2 {
+    grid-column: span 2;
+}

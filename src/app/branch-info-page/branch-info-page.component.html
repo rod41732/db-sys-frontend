@@ -1,58 +1,69 @@
- <div class="container">
-  <h1 mat-dialog-title *ngIf='isCreating'>Create Branch</h1>
-  <h1 mat-dialog-title *ngIf='!isCreating'>Editing Branch ID {{ branch.BranchID }}</h1>
-  <mat-dialog-content class="center">
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.BranchName" placeholder="Branch Name">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="date" [(ngModel)]="openDate" placeholder="Opening Date">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.DailyHours" placeholder="Open Hours">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="email" [(ngModel)]="branch.Email" placeholder="Email">
-    </mat-form-field>
+<app-navbar></app-navbar>
+<div class="center">
+  <div class="container">
+    <div class="centered">
+      <div class="typo-title" *ngIf='isCreating'>Create Branch</div>
+      <div class="typo-title" *ngIf='!isCreating'>Editing Branch ID {{ branch.BranchID }}</div>
+    </div>
+    <div class="three-per-row">
+      <mat-form-field class="span-2">
+        <input matInput [(ngModel)]="branch.BranchName" placeholder="Branch Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="date" [(ngModel)]="openDate" placeholder="Opening Date">
+      </mat-form-field>
+    </div>
     <mat-form-field>
       <input matInput [(ngModel)]="branch.PhoneNo" placeholder="Phone Number">
     </mat-form-field>
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.StreetNo" placeholder="Street Address">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.SubDistrict" placeholder="Sub District">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.District" placeholder="District">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.Province" placeholder="Province">
-    </mat-form-field>  
-    <mat-form-field>
-      <input matInput [(ngModel)]="branch.ZipCode" placeholder="Zip Code">
-    </mat-form-field>
+    <div class="three-per-row">
+      <mat-form-field>
+        <input matInput [(ngModel)]="branch.DailyHours" placeholder="Open Hours">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="email" [(ngModel)]="branch.Email" placeholder="Email">
+      </mat-form-field>
+    </div>
+
+    <div class="three-per-row  grid-stretch">
+      <mat-form-field class="span-2">
+        <input matInput [(ngModel)]="branch.StreetNo" placeholder="Street Address">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="branch.SubDistrict" placeholder="Sub District">
+      </mat-form-field>
+    </div>
+    <div class="three-per-row">
+      <mat-form-field>
+        <input matInput [(ngModel)]="branch.District" placeholder="District">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="branch.Province" placeholder="Province">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="branch.ZipCode" placeholder="Zip Code">
+      </mat-form-field>
+    </div>
     <!-- <button mat-button [mat-dialog-close]='null' cdkFocusInitial> Cancel </button> -->
     <button mat-button> <a [routerLink]="'/branch'"> back </a> </button>
     <button mat-button (click)='saveOrCreate()' cdkFocusInitial> Save/Create </button>
 
-  <div *ngIf="!isCreating">
-    <h2> employeees </h2>
-    <mat-form-field>
-      <mat-select placeholder="select employee to add" [(ngModel)]='selectedEmployee'>
-        <mat-option *ngFor="let employee of allEmployees" [value]="employee.EmpID">{{ employee.EmpID + employee.FirstName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button (click)="addEmployee()"> add to this branch </button>
-    <div>
-      <div *ngFor="let employee of branchEmployees">
-        {{employee.EmpID}}
-        {{employee.FirstName}}
+    <div *ngIf="!isCreating">
+      <h2> employeees </h2>
+      <mat-form-field>
+        <mat-select placeholder="select employee to add" [(ngModel)]='selectedEmployee'>
+          <mat-option *ngFor="let employee of allEmployees" [value]="employee.EmpID">
+            {{ employee.EmpID + employee.FirstName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button (click)="addEmployee()"> add to this branch </button>
+      <div>
+        <div *ngFor="let employee of branchEmployees">
+          {{employee.EmpID}}
+          {{employee.FirstName}}
+        </div>
       </div>
     </div>
+    <button class="circle-button" (click)="null"> Cancel </button>
   </div>
-  </mat-dialog-content>
-    <button mat-button (click)="null"> Cancel </button>
 </div>
-<!-- branch info works -->
-
